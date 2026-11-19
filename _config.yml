@@ -1,0 +1,77 @@
+title: Abdul Mueed
+description: Full Stack Developer from Pakistan. Creator of PluginStream, CodeBin and AI-Base.
+url: https://am-abdulmueed.github.io
+locale: en_US
+
+author:
+  name: Abdul Mueed
+  url: https://github.com/am-abdulmueed
+  twitter: rainxch_zed
+
+social:
+  twitter: rainxch_zed
+
+
+buttondown_username: "githubstore"
+
+# Search Console verification (paste the content from the meta tag Google/Bing give you).
+# Leave empty to disable verification meta tags.
+google_site_verification: ""
+bing_site_verification: "A46BE24278DA59CF31D6C685FD83600C"
+
+# IndexNow key — manual setup, see PR description for steps.
+
+logo: /android-chrome-512x512.png
+
+include:
+  - .well-known
+  - admin
+
+# Blog collection (folder name `_news` kept for backwards-compat with Decap CMS)
+collections:
+  news:
+    output: true
+    permalink: /blog/:slug/
+    sort_by: date
+
+defaults:
+  - scope:
+      path: ""
+      type: news
+    values:
+      layout: news_post
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+permalink: pretty
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-redirect-from
+
+# Sitemap exclusions
+sitemap:
+  file: "/sitemap.xml"
+
+# Exclude from build
+exclude:
+  - README.md
+  - LICENSE
+  - .DS_Store
+  - "*.bak"
+  - Gemfile
+  - Gemfile.lock
+  - run.bat
+  - server.bat
+  - vendor
+  - .brain
+  - workers
+  - node_modules
+  # Reference-only material — not part of the published site (avoids duplicate content)
+  - sample
+  - sample.html
+  - 1.txt
+  - "Deck Run Completion.md"

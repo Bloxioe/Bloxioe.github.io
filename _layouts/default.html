@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: 'en' }}" data-theme="light">
+<head>
+{%- include head.html -%}
+</head>
+<body class="has-announce{% if page.body_class %} {{ page.body_class }}{% endif %}">
+    {% include announce_bar.html %}
+    {%- unless page.no_nav -%}
+    {% include nav.html %}
+    {%- endunless -%}
+    <main>
+        {{ content }}
+    </main>
+    {% include footer.html %}
+    {% include scripts.html %}
+</body>
+</html>

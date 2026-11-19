@@ -1,0 +1,59 @@
+name = "gh-store-app-oauth"
+main = "src/index.ts"
+compatibility_date = "2025-05-01"
+workers_dev = false
+
+# Production routes — Worker handles /auth/* on the apex domain.
+# Jekyll site continues to serve everything else.
+[[routes]]
+pattern = "github-store.org/auth/*"
+zone_name = "github-store.org"
+
+# Public, non-secret config.
+[vars]
+GITHUB_CLIENT_ID = "Ov23linTY28VFpFjFiI9"
+BACKEND_STATE_URL = "https://api.github-store.org/v1/oauth/state"
+BACKEND_EXCHANGE_URL = "https://api.github-store.org/v1/oauth/exchange"
+APP_SCHEME = "githubstore"
+
+# Per-IP rate limit on /auth/register. Workers Rate Limiting bindings only
+# support `period = 10` or `period = 60` seconds — closest match to the agreed
+# 60/hr/IP intent is 2 requests per 60s sliding window (~120/hr ceiling). This
+# blocks scrapers (which run thousands/hr) while leaving headroom for shared
+# NAT. For an exact hourly cap, layer a Cloudflare WAF rate-limit rule on the
+# zone.
+[[unsafe.bindings]]
+name = "RATE_LIMITER"
+type = "ratelimit"
+namespace_id = "1001"
+simple = { limit = 2, period = 60 }
+
+# Secrets (do NOT commit values — set via `wrangler secret put`):
+#   OAUTH_SERVICE_TOKEN   shared-secret header sent to api.github-store.org
+#   STATE_ENC_KEY         AES-GCM-256 key, base64 of 32 random bytes.
+#                         Generate: `openssl rand 32 | base64`
+#                         Rotation: see README §"State encryption key".
+#
+# Storage: this Worker is stateless. The PKCE code_verifier is encrypted with
+# STATE_ENC_KEY and carried inside the `state` query param sent to GitHub, so
+# there is no KV namespace, no Durable Object, and no per-flow free-tier
+# consumption. Backend `/v1/oauth/state` owns state uniqueness via its
+# INSERT … ON CONFLICT DO NOTHING constraint; the Worker maps backend 409 to
+# the same `state_already_registered` response shape the app already handles.
+
+# Staging environment — same code, separate secret, no live route.
+[env.staging]
+name = "gh-store-app-oauth-staging"
+workers_dev = true
+
+[env.staging.vars]
+GITHUB_CLIENT_ID = "Ov23linTY28VFpFjFiI9"
+BACKEND_STATE_URL = "https://api.github-store.org/v1/oauth/state"
+BACKEND_EXCHANGE_URL = "https://api.github-store.org/v1/oauth/exchange"
+APP_SCHEME = "githubstore"
+
+[[env.staging.unsafe.bindings]]
+name = "RATE_LIMITER"
+type = "ratelimit"
+namespace_id = "1002"
+simple = { limit = 2, period = 60 }

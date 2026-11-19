@@ -1,0 +1,376 @@
+---
+layout: default
+title_full: Project details — Abdul Mueed
+description: Repository information, README and previews for the open-source projects of Abdul Mueed, pulled live from GitHub.
+keywords: abdul mueed, open source projects, github repositories, portfolio, readme
+permalink: /project/
+---
+
+<style>
+    #repoStats { padding-bottom: 8px; }
+
+    /* GitHub badges (shields.io etc.) inline + responsive rakho. Base rule
+       har README image ko block banata hai (ink border + offset shadow), jis se
+       badge ka shadow us ki doosri copy jaisa dikhta hai aur badges ek ke neeche
+       ek stack ho jate hain. */
+    .news-article__body img.gh-badge {
+        display: inline-block;
+        max-width: 100%;
+        margin: 0 4px 4px 0;
+        border: none;
+        box-shadow: none;
+        background: none;
+        vertical-align: middle;
+    }
+    .news-article__body a.gh-badge-link { text-decoration: none; }
+
+    /* ── README loading state ─────────────────────────────────
+       Jab tak README fetch ho raha hai, skeleton + indeterminate bar
+       dikhao taake page toota hua na lage. */
+    .readme-loading { padding: 4px 0 8px; }
+    .news-article__body .readme-loading__status {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0 0 16px;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--ink-soft);
+    }
+    .readme-loading__pulse {
+        width: 12px; height: 12px;
+        flex: none;
+        background: var(--accent);
+        border: 2px solid var(--ink);
+        animation: readme-pulse 900ms steps(2, end) infinite;
+    }
+    .readme-loading__bar {
+        position: relative;
+        height: 10px;
+        margin-bottom: 22px;
+        background: var(--surface-variant);
+        border: var(--bw-chip) solid var(--ink);
+        box-shadow: var(--sh-sub);
+        overflow: hidden;
+    }
+    .readme-loading__bar::after {
+        content: '';
+        position: absolute;
+        top: 0; bottom: 0;
+        width: 45%;
+        background: var(--accent);
+        animation: readme-scan 1.15s linear infinite;
+    }
+    .readme-loading__skeleton { display: grid; gap: 12px; }
+    .readme-loading__skeleton span {
+        display: block;
+        height: 14px;
+        background: var(--surface-variant);
+        border: 2px solid var(--ink);
+        position: relative;
+        overflow: hidden;
+    }
+    .readme-loading__skeleton span::after {
+        content: '';
+        position: absolute;
+        top: 0; bottom: 0;
+        width: 40%;
+        background: linear-gradient(90deg, transparent, var(--screentone), transparent);
+        animation: readme-shimmer 1.3s linear infinite;
+    }
+    .readme-loading__skeleton span:nth-child(1) { width: 46%; }
+    .readme-loading__skeleton span:nth-child(2) { width: 100%; }
+    .readme-loading__skeleton span:nth-child(3) { width: 86%; }
+    .readme-loading__skeleton span:nth-child(4) { width: 72%; }
+    .readme-loading__skeleton span:nth-child(5) { width: 94%; }
+    .readme-loading__skeleton span:nth-child(6) { width: 38%; }
+    @keyframes readme-pulse {
+        0%, 100% { transform: scale(0.7); opacity: 0.45; }
+        50% { transform: scale(1.15); opacity: 1; }
+    }
+    @keyframes readme-scan {
+        from { transform: translateX(-110%); }
+        to { transform: translateX(260%); }
+    }
+    @keyframes readme-shimmer {
+        from { transform: translateX(-120%); }
+        to { transform: translateX(320%); }
+    }
+
+    /* ── Copy-link button (git clone / command blocks) ───────── */
+    .news-article__body .code-block { position: relative; }
+    .news-article__body .code-block pre { padding-top: 2.25rem; }
+    .news-article__body .code-copy {
+        position: absolute;
+        top: 6px; right: 6px;
+        z-index: 2;
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding: 0.25rem 0.5rem;
+        color: var(--ink);
+        background: var(--surface);
+        border: 2px solid var(--ink);
+        box-shadow: var(--sh-sub);
+        cursor: pointer;
+        transition: background 140ms var(--ease), color 140ms var(--ease),
+                    transform 140ms var(--ease), box-shadow 140ms var(--ease);
+    }
+    .news-article__body .code-copy:hover,
+    .news-article__body .code-copy:focus-visible {
+        outline: none;
+        background: var(--ink);
+        color: var(--page);
+    }
+    .news-article__body .code-copy:active {
+        transform: translate(2px, 2px);
+        box-shadow: 1px 1px 0 var(--shadow);
+    }
+    .news-article__body .code-copy.is-copied { background: var(--accent); color: var(--on-accent); }
+
+    @media (prefers-reduced-motion: reduce) {
+        .readme-loading__pulse,
+        .readme-loading__bar::after,
+        .readme-loading__skeleton span::after { animation: none; }
+        .readme-loading__bar::after { width: 100%; opacity: 0.5; }
+        .readme-loading__skeleton span::after { display: none; }
+    }
+</style>
+
+<section class="page-hero container">
+    <div class="page-hero__inner">
+        <p class="section-header__overline" id="repoOverline">Project detail</p>
+        <h1 class="page-hero__title" id="repoName">Loading…</h1>
+        <p class="page-hero__subtitle" id="repoDesc">Fetching repository details from GitHub…</p>
+        <div class="page-hero__actions" id="repoActions">
+            <a class="btn btn--outlined" href="/#projects">← Back to projects</a>
+        </div>
+    </div>
+</section>
+
+<section class="container" id="repoStats" hidden>
+    <ul class="about__facts" id="repoStatsList"></ul>
+</section>
+
+<section class="container">
+    <article class="news-article">
+        <div class="news-article__body" id="repoReadme">
+            <div class="readme-loading" role="status" aria-live="polite">
+                <p class="readme-loading__status">
+                    <span class="readme-loading__pulse" aria-hidden="true"></span>
+                    <span>Loading README…</span>
+                </p>
+                <div class="readme-loading__bar" aria-hidden="true"></div>
+                <div class="readme-loading__skeleton" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+        <footer class="news-article__footer">
+            <a href="/#projects" class="news-article__back">← All projects</a>
+        </footer>
+    </article>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+(() => {
+    const OWNER = 'am-abdulmueed';
+
+    /* Repos jin ka live demo hai */
+    const LIVE_SITES = {
+        'pluginstream': 'https://pluginstream.pages.dev/',
+        'portfolio': 'https://am-abdulmueed.vercel.app/',
+        'mysocials': 'https://msocials.vercel.app/',
+        'url-sh': 'https://url-shs.vercel.app/',
+        'ai-base': 'https://am-aibase.vercel.app/',
+        'ide': 'https://ide-alpha.vercel.app/',
+        'codebin': 'https://am-codebin.vercel.app/',
+        'nexgama': 'https://nexgama.vercel.app/'
+    };
+
+    const nameEl = document.getElementById('repoName');
+    const descEl = document.getElementById('repoDesc');
+    const overlineEl = document.getElementById('repoOverline');
+    const actionsEl = document.getElementById('repoActions');
+    const statsEl = document.getElementById('repoStats');
+    const statsListEl = document.getElementById('repoStatsList');
+    const readmeEl = document.getElementById('repoReadme');
+
+    const repo = (new URLSearchParams(location.search).get('repo') || '').trim();
+
+    /* Badge services — in images ko inline/responsive treat karo */
+    const BADGE_PATTERN = /(img\.shields\.io|badgen\.net|badge\.fury\.io|\/badge|badge\.svg|travis-ci\.|codecov\.io|coveralls\.io|api\.netlify\.com|api\.codeclimate\.com|snyk\.io|readthedocs\.org|opencollective\.com|contrib\.rocks|api\.star-history\.com|workflows\/[^\s"'?]*badge)/i;
+
+    function fail(message) {
+        nameEl.textContent = 'Project not found';
+        descEl.textContent = message;
+        overlineEl.textContent = 'Project detail';
+        readmeEl.innerHTML = '<p>' + message + '</p>';
+    }
+
+    function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, c => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[c]));
+    }
+
+    function addButton(href, label, filled) {
+        const a = document.createElement('a');
+        a.className = filled ? 'btn btn--filled' : 'btn btn--outlined';
+        a.href = href;
+        a.textContent = label;
+        if (/^https?:/i.test(href)) {
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+        }
+        actionsEl.insertBefore(a, actionsEl.firstElementChild);
+        return a;
+    }
+
+    if (!repo) {
+        fail('No repository was given. Open a project from the homepage to see its details here.');
+        return;
+    }
+
+    (async () => {
+        let data;
+        try {
+            const response = await fetch(`https://api.github.com/repos/${OWNER}/${encodeURIComponent(repo)}`);
+            if (response.status === 404) return fail(`The repository “${repo}” could not be found on GitHub.`);
+            if (!response.ok) return fail(`GitHub returned an error (${response.status}). Please try again in a moment.`);
+            data = await response.json();
+        } catch (error) {
+            return fail('Could not reach GitHub. Check your connection and reload the page.');
+        }
+
+        const branch = data.default_branch || 'main';
+        const rawBase = `https://raw.githubusercontent.com/${OWNER}/${data.name}/${branch}/`;
+        const blobBase = `https://github.com/${OWNER}/${data.name}/blob/${branch}/`;
+
+        /* ─── Header ─── */
+        document.title = `${data.name} — Project details`;
+        overlineEl.textContent = `${data.language || 'Project'}${data.archived ? ' · Archived' : ''}`;
+        nameEl.textContent = data.name;
+        descEl.textContent = data.description || 'No description provided for this repository yet.';
+        if (data.homepage) descEl.textContent += ' · ' + data.homepage;
+
+        const live = LIVE_SITES[data.name.toLowerCase()];
+        if (live) addButton(live, 'Live site', false);
+        addButton(data.html_url, 'GitHub', true);
+
+        /* ─── Stats ─── */
+        const updated = new Date(data.pushed_at).toLocaleDateString('en-US', {
+            month: 'short', day: 'numeric', year: 'numeric'
+        });
+        const stats = [
+            ['Stars', data.stargazers_count],
+            ['Forks', data.forks_count],
+            ['Language', data.language || '—'],
+            ['Last update', updated]
+        ];
+        if (data.license && data.license.spdx_id) stats.push(['License', data.license.spdx_id]);
+        statsListEl.innerHTML = stats.map(([label, value]) => `
+            <li class="about__fact">
+                <span class="about__fact__label">${escapeHtml(label)}</span>
+                <span class="about__fact__value">${escapeHtml(value)}</span>
+            </li>`).join('');
+        statsEl.hidden = false;
+
+        /* ─── README ─── */
+        try {
+            const readmeResponse = await fetch(
+                `https://api.github.com/repos/${OWNER}/${data.name}/readme`,
+                { headers: { Accept: 'application/vnd.github.raw+json' } }
+            );
+            if (!readmeResponse.ok) {
+                readmeEl.innerHTML = '<p>This repository has no README yet. Use the GitHub button above to browse the source.</p>';
+                return;
+            }
+
+            const holder = document.createElement('div');
+            holder.innerHTML = marked.parse(await readmeResponse.text());
+
+            /* Relative links ko GitHub ke absolute URLs par le jao,
+               aur badges ko inline mark karo */
+            holder.querySelectorAll('img[src]').forEach(img => {
+                const src = img.getAttribute('src') || '';
+                if (BADGE_PATTERN.test(src)) {
+                    img.classList.add('gh-badge');
+                    const link = img.closest('a');
+                    if (link) link.classList.add('gh-badge-link');
+                }
+                if (!/^(https?:|data:)/i.test(src)) {
+                    img.setAttribute('src', rawBase + src.replace(/^(\.\/|\/)/, ''));
+                }
+                img.setAttribute('loading', 'lazy');
+            });
+            holder.querySelectorAll('a[href]').forEach(a => {
+                const href = a.getAttribute('href') || '';
+                if (!/^(https?:|mailto:|#)/i.test(href)) {
+                    a.setAttribute('href', blobBase + href.replace(/^(\.\/|\/)/, ''));
+                }
+                a.setAttribute('target', '_blank');
+                a.setAttribute('rel', 'noopener noreferrer');
+            });
+
+            /* Code blocks: (1) andar ka duplicate markdown link hata do,
+               (2) git clone / link wali command par copy button laga do */
+            holder.querySelectorAll('pre').forEach(pre => {
+                const code = pre.querySelector('code');
+                if (!code) return;
+
+                code.textContent = code.textContent.replace(
+                    /\[(https?:\/\/[^\s\]]+)\]\(\1\)/g, '$1'
+                );
+
+                const text = code.textContent.trim();
+                const url = text.match(/https?:\/\/[^\s"'`)>]+/);
+                if (!url && !/\bgit clone\b/i.test(text)) return;
+
+                const payload = url ? url[0] : text;
+
+                const box = document.createElement('div');
+                box.className = 'code-block';
+                pre.parentNode.insertBefore(box, pre);
+                box.appendChild(pre);
+
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'code-copy';
+                button.textContent = 'Copy link';
+                button.addEventListener('click', async () => {
+                    let copied = false;
+                    try {
+                        await navigator.clipboard.writeText(payload);
+                        copied = true;
+                    } catch (error) {
+                        /* Clipboard API blocked — text select karwa do */
+                        const range = document.createRange();
+                        range.selectNodeContents(code);
+                        const selection = window.getSelection();
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+                    }
+                    button.textContent = copied ? 'Copied!' : 'Press Ctrl+C';
+                    button.classList.toggle('is-copied', copied);
+                    setTimeout(() => {
+                        button.textContent = 'Copy link';
+                        button.classList.remove('is-copied');
+                    }, 1800);
+                });
+                box.appendChild(button);
+            });
+
+            /* nodes ko move karo (innerHTML se dobara banane par button ke
+               click listeners kho jate) */
+            readmeEl.replaceChildren(...holder.childNodes);
+        } catch (error) {
+            readmeEl.innerHTML = '<p>Could not load the README for this repository.</p>';
+        }
+    })();
+})();
+</script>

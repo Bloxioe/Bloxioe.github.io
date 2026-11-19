@@ -1,0 +1,30 @@
+---
+layout: default
+---
+<article class="news-article news-article--post container">
+    <header class="news-article__header">
+        <p class="news-article__meta">
+            <time datetime="{{ page.date | date_to_xmlschema }}">
+                {{ page.date | date: "%B %-d, %Y" }}
+            </time>
+            {% if page.tags %}
+                {% for tag in page.tags %}
+                    <span class="news-article__tag">{{ tag }}</span>
+                {% endfor %}
+            {% endif %}
+        </p>
+        <h1 class="news-article__title">{{ page.title }}</h1>
+        {% if page.description %}
+            <p class="news-article__lede">{{ page.description }}</p>
+        {% endif %}
+    </header>
+    <div class="news-article__body">
+        {{ content }}
+    </div>
+    <footer class="news-article__footer">
+        <div class="news-article__newsletter">
+            {% include newsletter.html id="post-footer" title="Get the next post" subtitle="One email every 2 weeks. No spam." %}
+        </div>
+        <a href="/blog/" class="news-article__back">← All posts</a>
+    </footer>
+</article>

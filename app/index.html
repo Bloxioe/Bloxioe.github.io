@@ -1,0 +1,397 @@
+---
+sitemap: false
+---
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Opening in Abdul Mueed…</title>
+    <meta name="description" content="Redirecting you to Abdul Mueed app to view this repository.">
+    <meta name="theme-color" content="#0c0a07" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#f1eadc" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/komi-store/komi-store/refs/heads/main/media-resources/app_icon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Open in Abdul Mueed">
+    <meta property="og:description" content="View this repository in Abdul Mueed — the open-source app store for GitHub releases.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/komi-store/komi-store/refs/heads/main/media-resources/banner.jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ── Design Tokens — Manga / inked-comic (Day default · Night toggle) ── */
+        :root {
+            --page: #f1eadc;
+            --surface: #faf5ea;
+            --surface-variant: #e7dec9;
+            --ink: #1b150d;
+            --ink-soft: #695f50;
+            --shadow: #1b150d;
+
+            --accent: #d8202a;
+            --on-accent: #ffffff;
+
+            --screentone: rgba(27, 21, 13, 0.16);
+            --speedline: rgba(27, 21, 13, 0.9);
+
+            --bw-panel: 3px;
+            --bw-btn: 2.5px;
+            --bw-chip: 2px;
+
+            --sh-panel: 6px 6px 0 var(--shadow);
+            --sh-sub: 3px 3px 0 var(--shadow);
+            --sh-btn: 4px 4px 0 var(--shadow);
+
+            --font-display: 'Anton', 'Zen Kaku Gothic New', system-ui, sans-serif;
+            --font-body: 'Zen Kaku Gothic New', system-ui, -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+            --ease: cubic-bezier(0.2, 0, 0, 1);
+            --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        [data-theme="dark"] {
+            --page: #0c0a07;
+            --surface: #16120c;
+            --surface-variant: #211b12;
+            --ink: #f0e9da;
+            --ink-soft: #968b77;
+            --shadow: #000000;
+            --accent: #d8202a;
+            --on-accent: #ffffff;
+            --screentone: rgba(240, 233, 218, 0.14);
+            --speedline: rgba(240, 233, 218, 0.85);
+        }
+        @media (prefers-color-scheme: dark) {
+            [data-theme="auto"] {
+                --page: #0c0a07;
+                --surface: #16120c;
+                --surface-variant: #211b12;
+                --ink: #f0e9da;
+                --ink-soft: #968b77;
+                --shadow: #000000;
+                --accent: #d8202a;
+                --on-accent: #ffffff;
+                --screentone: rgba(240, 233, 218, 0.14);
+                --speedline: rgba(240, 233, 218, 0.85);
+            }
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            background: var(--page);
+            color: var(--ink);
+            line-height: 1.65;
+            overflow-x: hidden;
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 200ms var(--ease), color 200ms var(--ease);
+        }
+        a { color: var(--ink); text-decoration: none; }
+
+        h1 { font-family: var(--font-display); font-weight: 400; line-height: 0.98; letter-spacing: 0.01em; }
+        code { font-family: var(--font-mono); }
+
+        /* Paper grain overlay */
+        body::before {
+            content: '';
+            position: fixed; inset: 0; z-index: 9999;
+            pointer-events: none; opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-repeat: repeat; background-size: 200px 200px;
+        }
+
+        /* Single calm speed-line wash behind the card (sanctioned hero decor) */
+        .bg { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+        .bg::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: repeating-conic-gradient(from 0deg at 50% 50%,
+                var(--speedline) 0deg 0.7deg, transparent 0.7deg 3.4deg);
+            opacity: 0.06;
+            -webkit-mask-image: radial-gradient(closest-side, #000 0%, transparent 70%);
+            mask-image: radial-gradient(closest-side, #000 0%, transparent 70%);
+        }
+
+        .card {
+            position: relative; z-index: 1;
+            background: var(--surface);
+            border: var(--bw-panel) solid var(--ink);
+            border-radius: 0; padding: 48px 40px;
+            max-width: 480px; width: calc(100% - 32px);
+            text-align: center; box-shadow: var(--sh-panel);
+            opacity: 0; transform: translateY(20px);
+            animation: cardIn 360ms 80ms var(--ease) forwards;
+        }
+        @keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
+
+        .app-icon {
+            width: 80px; height: 80px;
+            border-radius: 0; border: var(--bw-chip) solid var(--ink);
+            margin: 0 auto 24px; box-shadow: var(--sh-sub);
+            opacity: 0; transform: scale(0.5);
+            animation: iconPop 360ms 200ms var(--ease-spring) forwards;
+        }
+        @keyframes iconPop { to { opacity: 1; transform: scale(1); } }
+
+        /* Status — skewed ink stamp */
+        .status {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 7px 16px;
+            background: var(--ink); color: var(--page);
+            border: var(--bw-chip) solid var(--ink); border-radius: 0;
+            font-family: var(--font-body);
+            font-size: 0.75rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.06em;
+            margin-bottom: 20px;
+            transform: skewX(-10deg);
+            box-shadow: var(--sh-sub);
+            opacity: 0;
+            animation: stampIn 360ms 300ms var(--ease-spring) forwards;
+        }
+        .status > * { transform: skewX(10deg); }
+        @keyframes stampIn {
+            from { opacity: 0; transform: skewX(-10deg) scale(1.4); }
+            to   { opacity: 1; transform: skewX(-10deg) scale(1); }
+        }
+        .status__dot {
+            width: 9px; height: 9px; border-radius: 50%;
+            background: var(--accent);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+        .title {
+            font-size: 2.25rem; text-transform: uppercase; letter-spacing: 0.01em; line-height: 0.98;
+            margin-bottom: 12px; opacity: 0; transform: translateY(15px);
+            animation: fadeUp 360ms 380ms var(--ease) forwards;
+        }
+        .title em { font-style: normal; color: var(--ink); }
+        .repo-name {
+            font-family: var(--font-mono);
+            font-size: 1rem; font-weight: 700; color: var(--ink);
+            background: var(--surface-variant);
+            border: var(--bw-chip) solid var(--ink);
+            padding: 6px 12px; display: inline-block;
+            margin-bottom: 14px; word-break: break-all;
+            box-shadow: var(--sh-sub);
+            opacity: 0; transform: translateY(12px);
+            animation: fadeUp 360ms 460ms var(--ease) forwards;
+        }
+        .subtitle {
+            font-size: 0.9375rem; color: var(--ink-soft); line-height: 1.65;
+            margin-bottom: 32px; opacity: 0; transform: translateY(12px);
+            animation: fadeUp 360ms 540ms var(--ease) forwards;
+        }
+
+        .spinner-wrap {
+            margin-bottom: 28px; opacity: 0;
+            animation: fadeUp 320ms 620ms var(--ease) forwards;
+            transform: translateY(10px);
+        }
+        .spinner {
+            width: 40px; height: 40px; margin: 0 auto;
+            border: 3px solid var(--surface-variant); border-top-color: var(--accent);
+            border-radius: 50%; animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .actions {
+            display: flex; flex-direction: column; gap: 12px;
+            opacity: 0; transform: translateY(12px);
+            animation: fadeUp 360ms 700ms var(--ease) forwards;
+        }
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            height: 48px; padding: 0 22px;
+            border: var(--bw-btn) solid var(--ink); cursor: pointer;
+            font-family: var(--font-display); font-weight: 400;
+            font-size: 1.0625rem; text-transform: uppercase; letter-spacing: 0.03em;
+            line-height: 1; text-decoration: none; white-space: nowrap;
+            border-radius: 0; position: relative;
+            background: var(--surface); color: var(--ink);
+            box-shadow: var(--sh-btn);
+            transition: transform 110ms var(--ease), box-shadow 110ms var(--ease);
+        }
+        .btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+        @media (hover: hover) {
+            .btn:hover { transform: translate(-3px, -3px); box-shadow: 7px 7px 0 var(--shadow); }
+        }
+        .btn:active { transform: translate(3px, 3px); box-shadow: 0 0 0 var(--shadow); }
+        .btn--filled { background: var(--accent); color: var(--on-accent); }
+        .btn--tonal  { background: var(--surface-variant); color: var(--ink); }
+        .btn--outlined { background: transparent; color: var(--ink); }
+        .btn-row { display: flex; gap: 12px; justify-content: center; }
+
+        .state { display: none; }
+        .state.active { display: block; }
+
+        .error-icon {
+            width: 56px; height: 56px;
+            border-radius: 0; border: var(--bw-chip) solid var(--ink);
+            background: var(--accent); color: var(--on-accent);
+            display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
+            box-shadow: var(--sh-sub);
+        }
+        .error-icon svg { width: 28px; height: 28px; }
+
+        .error-code {
+            font-family: var(--font-mono);
+            font-size: 0.8125rem; color: var(--ink);
+            background: var(--surface-variant);
+            border: var(--bw-chip) solid var(--ink);
+            padding: 6px 12px; display: inline-block; margin-top: 8px;
+            box-shadow: var(--sh-sub);
+            word-break: break-all;
+        }
+
+        .footer {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            text-align: center; padding: 16px; z-index: 1;
+        }
+        .footer a {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: var(--ink-soft); font-size: 0.8125rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.04em;
+            transition: color 150ms var(--ease);
+        }
+        @media (hover: hover) {
+            .footer a:hover { color: var(--ink); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; }
+        }
+        .footer img { width: 20px; height: 20px; border-radius: 0; border: 2px solid var(--ink); }
+
+        @media (max-width: 520px) {
+            .card { padding: 36px 24px; }
+            .title { font-size: 1.875rem; }
+            .btn-row { flex-direction: column; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+            }
+            .card, .app-icon, .status, .title, .repo-name, .subtitle, .spinner-wrap, .actions { opacity: 1; transform: none; }
+            .status { transform: skewX(-10deg); }
+            .spinner { animation: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg"></div>
+
+    <main class="card">
+        <!-- Redirecting State -->
+        <div class="state active" id="stateRedirecting">
+            <img class="app-icon" src="https://raw.githubusercontent.com/komi-store/komi-store/refs/heads/main/media-resources/app_icon.png" alt="Abdul Mueed" width="80" height="80">
+            <div class="status">
+                <span class="status__dot"></span>
+                Redirecting…
+            </div>
+            <h1 class="title">Opening in <em>Abdul Mueed</em></h1>
+            <p class="repo-name" id="repoDisplay"></p>
+            <p class="subtitle">You'll be redirected to the app in a moment. If nothing happens, use the buttons below.</p>
+            <div class="spinner-wrap"><div class="spinner"></div></div>
+            <div class="actions">
+                <a class="btn btn--filled" id="openAppBtn" href="#">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+                    Open in Abdul Mueed
+                </a>
+                <div class="btn-row">
+                    <a class="btn btn--tonal" id="githubBtn" href="#" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg>
+                        View on GitHub
+                    </a>
+                    <a class="btn btn--outlined" href="https://github.com/am-abdulmueed/pluginstreamreleases/latest" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
+                        Get the App
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error State -->
+        <div class="state" id="stateError">
+            <div class="error-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+            </div>
+            <h1 class="title">Invalid Link</h1>
+            <p class="subtitle" style="margin-bottom:24px;">This deep link doesn't point to a valid repository. The URL should look like:<br><code class="error-code">am-abdulmueed.github.io/app/?repo=owner/repo</code></p>
+            <div class="actions">
+                <a class="btn btn--filled" href="https://am-abdulmueed.github.io">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                    Go to Homepage
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <div class="footer">
+        <a href="https://am-abdulmueed.github.io">
+            <img src="https://raw.githubusercontent.com/komi-store/komi-store/refs/heads/main/media-resources/app_icon.png" alt="" width="20" height="20">
+            Abdul Mueed
+        </a>
+    </div>
+
+    <script>
+    (() => {
+        const params = new URLSearchParams(window.location.search);
+        const repo = params.get('repo');
+
+        const stateRedirecting = document.getElementById('stateRedirecting');
+        const stateError = document.getElementById('stateError');
+        const repoDisplay = document.getElementById('repoDisplay');
+        const openAppBtn = document.getElementById('openAppBtn');
+        const githubBtn = document.getElementById('githubBtn');
+
+        // Validate
+        const match = repo ? repo.match(/^([^/]+)\/([^/]+)$/) : null;
+        if (!match) {
+            stateRedirecting.classList.remove('active');
+            stateError.classList.add('active');
+            return;
+        }
+
+        const owner = match[1];
+        const repoName = match[2];
+        const githubUrl = 'https://github.com/' + owner + '/' + repoName;
+
+        // URIs
+        const customSchemeUri = 'githubstore://repo/' + owner + '/' + repoName;
+        const intentUri = 'intent://repo/' + owner + '/' + repoName
+            + '#Intent;scheme=githubstore;package=zed.rainxch.githubstore;'
+            + 'S.browser_fallback_url=' + encodeURIComponent('https://github.com/am-abdulmueed/pluginstreamreleases/latest')
+            + ';end';
+
+        // Detect platform (MUST be before we use isAndroid)
+        const ua = navigator.userAgent.toLowerCase();
+        const isAndroid = ua.includes('android');
+
+        const openUri = isAndroid ? intentUri : customSchemeUri;
+
+        // Set up UI
+        repoDisplay.textContent = owner + '/' + repoName;
+        document.title = 'Opening ' + owner + '/' + repoName + ' — Abdul Mueed';
+        openAppBtn.href = openUri;
+        githubBtn.href = githubUrl;
+
+        // Auto-redirect only on non-Android (iOS + desktop)
+        if (!isAndroid) {
+            setTimeout(() => {
+                window.location.replace(openUri);
+            }, 1200);
+        }
+
+        // Optional: log for debugging
+        console.log('Platform:', isAndroid ? 'Android' : 'iOS/Desktop');
+        console.log('openUri:', openUri);
+    })();
+</script>
+</body>
+</html>

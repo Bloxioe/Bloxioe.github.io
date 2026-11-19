@@ -1,0 +1,14 @@
+# Jekyll build output
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# OS / editor
+.DS_Store
+
+# Local dev convenience scripts (not part of the site)
+run.bat
+
+# Local agent config (keep the design-system reference tracked)
+.claude/settings.local.json
+.claude/komi/

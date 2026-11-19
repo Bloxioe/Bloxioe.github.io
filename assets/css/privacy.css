@@ -1,0 +1,220 @@
+/* Privacy policy — consumes the shared manga tokens from site.css (loaded before this
+   file). No bespoke palette, no token redefinition. Inked panels, hard shadows, zero radius. */
+
+.privacy-page {
+    background: var(--page);
+    color: var(--ink);
+}
+
+.privacy-hero {
+    padding: 96px 24px 56px;
+    max-width: 920px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.privacy-hero__overline {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--on-accent);
+    background: var(--accent);
+    border: var(--bw-chip) solid var(--ink);
+    padding: 4px 12px;
+    margin-bottom: 18px;
+    transform: skewX(-10deg);
+    box-shadow: var(--sh-sub);
+}
+
+.privacy-hero__overline > * {
+    display: inline-block;
+    transform: skewX(10deg);
+}
+
+.privacy-hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    text-transform: uppercase;
+    color: var(--ink);
+    letter-spacing: 0.01em;
+    line-height: 0.95;
+    margin: 0 0 16px;
+}
+
+.privacy-hero p {
+    font-size: 1.0625rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    margin: 0;
+    max-width: 680px;
+}
+
+.privacy-container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 24px 24px 96px;
+    color: var(--ink);
+    line-height: 1.7;
+}
+
+.privacy-container h2 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    color: var(--ink);
+    font-size: clamp(1.4rem, 3.2vw, 1.9rem);
+    letter-spacing: 0.01em;
+    line-height: 1;
+    margin: 3rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: var(--bw-chip) solid var(--ink);
+}
+
+.privacy-container h3 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    color: var(--ink);
+    font-size: 1.2rem;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    margin: 1.75rem 0 0.75rem;
+}
+
+.privacy-container p {
+    margin: 0 0 1rem;
+    color: var(--ink-soft);
+}
+
+.privacy-container ul,
+.privacy-container ol {
+    margin: 1rem 0 1.5rem 1.75rem;
+    color: var(--ink-soft);
+}
+
+.privacy-container li {
+    margin-bottom: 0.5rem;
+}
+
+.privacy-container strong {
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.privacy-container a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+}
+
+.privacy-container code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: var(--surface-variant);
+    border: var(--bw-chip) solid var(--ink);
+    padding: 0.05rem 0.35rem;
+}
+
+.privacy-container .info-box {
+    background: var(--surface);
+    border: var(--bw-panel) solid var(--ink);
+    box-shadow: var(--sh-panel);
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 2.5rem;
+    color: var(--ink);
+    line-height: 1.9;
+}
+
+.privacy-container .info-box strong {
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.privacy-container .highlight {
+    background: var(--surface-variant);
+    border: var(--bw-chip) solid var(--ink);
+    box-shadow: var(--sh-sub);
+    padding: 0.75rem 1rem;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.privacy-container .no-collect {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+    margin: 1.25rem 0 2rem;
+}
+
+.privacy-container .no-collect-item {
+    background: var(--surface-variant);
+    border: var(--bw-chip) solid var(--ink);
+    box-shadow: var(--sh-sub);
+    padding: 14px 16px;
+    color: var(--ink);
+    font-size: 0.9375rem;
+    font-weight: 500;
+}
+
+.privacy-container .contact-section {
+    background: var(--surface);
+    border: var(--bw-panel) solid var(--ink);
+    box-shadow: var(--sh-panel);
+    padding: 2.5rem 2rem;
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.privacy-container .contact-section h2 {
+    border: none;
+    margin-top: 0;
+    padding-bottom: 0;
+}
+
+.privacy-container .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.privacy-container .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.65rem 1.25rem;
+    background: var(--accent);
+    color: var(--on-accent);
+    border: var(--bw-btn) solid var(--ink);
+    box-shadow: var(--sh-btn);
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.privacy-container .contact-link:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0 0 0 var(--shadow);
+}
+
+@media (hover: hover) {
+    .privacy-container .contact-link:hover {
+        transform: translate(-3px, -3px);
+        box-shadow: 7px 7px 0 var(--shadow);
+        text-decoration: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .privacy-hero { padding: 64px 16px 40px; }
+    .privacy-container { padding: 16px 16px 72px; }
+    .privacy-container .info-box,
+    .privacy-container .contact-section { padding: 1.5rem 1.25rem; }
+}

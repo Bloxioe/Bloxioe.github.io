@@ -1,0 +1,44 @@
+# localhost par Decap ka local proxy (npx decap-server) use karo —
+# GitHub OAuth/repo access ki zarurat nahi, changes seedha disk par likhte hain.
+# Yeh sirf localhost par activate hota hai; live site par koi asar nahi.
+#
+# GitHub login (OAuth) test karne ke liye ise comment karo:
+# local_backend: true
+
+backend:
+  name: github
+  repo: am-abdulmueed/am-abdulmueed.github.io
+  branch: main
+  base_url: https://decap-proxy.am-abdulmueed.workers.dev
+
+site_url: https://am-abdulmueed.github.io
+display_url: https://am-abdulmueed.github.io
+
+media_folder: assets/uploads
+public_folder: /assets/uploads
+
+collections:
+  - name: news
+    label: News Posts
+    folder: _news
+    create: true
+    delete: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: md
+    format: frontmatter
+    sortable_fields: ["date", "title"]
+    summary: "{{title}} — {{date | date('YYYY-MM-DD')}}"
+    preview_path: "blog/{{slug}}"
+    fields:
+      - { name: title, label: Title, widget: string, hint: "Used as page title and in the news listing." }
+      - { name: slug, label: URL slug, widget: string, required: false, pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Lowercase letters, numbers, and hyphens only — e.g. how-github-store-started'], hint: "Custom URL slug. The post URL becomes /blog/<slug>/. Lowercase, hyphens only. Leave blank to auto-derive from filename." }
+      - { name: description, label: Lede, widget: string, required: false, hint: "One-sentence summary shown under the title and in feeds." }
+      - { name: date, label: Date, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - name: tags
+        label: Tags
+        widget: list
+        required: false
+        field: { name: tag, widget: string }
+      - { name: redirect_from, label: Redirect from (legacy URLs), widget: list, required: false, hint: "Old URLs to 301 to this post. Useful if you change the slug after publishing.", field: { name: url, widget: string } }
+      - { name: draft, label: Draft, widget: boolean, default: false, required: false, hint: "Draft posts are not published." }
+      - { name: body, label: Body, widget: markdown }

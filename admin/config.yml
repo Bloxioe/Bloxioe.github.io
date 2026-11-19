@@ -2,8 +2,8 @@
 # GitHub OAuth/repo access ki zarurat nahi, changes seedha disk par likhte hain.
 # Yeh sirf localhost par activate hota hai; live site par koi asar nahi.
 #
-# GitHub login (OAuth) test karne ke liye ise comment karo:
-# local_backend: true
+# GitHub login (OAuth) test karna ho to ise comment kar do:
+local_backend: true
 
 backend:
   name: github
@@ -42,3 +42,33 @@ collections:
       - { name: redirect_from, label: Redirect from (legacy URLs), widget: list, required: false, hint: "Old URLs to 301 to this post. Useful if you change the slug after publishing.", field: { name: url, widget: string } }
       - { name: draft, label: Draft, widget: boolean, default: false, required: false, hint: "Draft posts are not published." }
       - { name: body, label: Body, widget: markdown }
+
+  - name: ads_files
+    label: Ads Files
+    description: "ads.txt (web ads) and app-ads.txt (app ads). Plain text — saved as-is at the repo root."
+    format: frontmatter
+    editor:
+      preview: false
+    files:
+      - name: ads_txt
+        label: ads.txt (AdSense / web ads)
+        file: ads.txt
+        fields:
+          - label: Content
+            name: body
+            widget: code
+            output_code_only: true
+            default_language: properties
+            allow_language_selection: false
+            hint: "Plain text only. One record per line: <domain>, <publisher-id>, <relationship>, <cert-id>. Lines starting with # are comments."
+      - name: app_ads_txt
+        label: app-ads.txt (AdMob / app ads)
+        file: app-ads.txt
+        fields:
+          - label: Content
+            name: body
+            widget: code
+            output_code_only: true
+            default_language: properties
+            allow_language_selection: false
+            hint: "Plain text only. One record per line: <domain>, <publisher-id>, <relationship>, <cert-id>. Lines starting with # are comments."

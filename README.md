@@ -490,7 +490,7 @@ For app bugs rather than website issues, open an issue on [am-abdulmueed/plugins
 ## License and credits
 
 - Licensed under the **Apache License 2.0** — see [LICENSE](LICENSE).
-- Original design and code by the **Komi Store Foundation**; modified and hosted by **Abdul Mueed**.
+- Design, code and maintenance by **Abdul Mueed**.
 - PluginStream and every referenced project remain the property of their respective authors.
 
 Questions, bug reports or sponsorship: use the [contact page](https://am-abdulmueed.github.io/contact/).

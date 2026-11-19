@@ -1,5 +1,5 @@
 ---
-title: "Keep Android Open: where Komi Store stands"
+title: "Keep Android Open: where PluginStream stands"
 description: Our public position on Google's developer-verification policy — and
   the three commitments that come with it.
 date: 2026-04-25

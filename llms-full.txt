@@ -1,0 +1,34 @@
+---
+layout: null
+---
+# Full Text — Bloxioe's Blog
+
+Generated from the current public pages and published blog posts each time the site is built. For the index, see [llms.txt]({{ site.url }}/llms.txt).
+
+{% assign public_pages = site.pages | sort: "url" %}
+{% for page in public_pages %}
+{% if page.title or page.title_full %}
+{% if page.sitemap != false and page.noindex != true %}
+{% unless page.url contains "/admin/" or page.url contains "/app/" or page.url == "/llms.txt" or page.url == "/llms-full.txt" or page.url == "/blog/feed.xml" %}
+## {{ page.title | default: page.title_full }}
+
+URL: {{ site.url }}{{ page.url }}
+
+{{ page.content | strip_html | normalize_whitespace }}
+{% endunless %}
+{% endif %}
+{% endif %}
+{% endfor %}
+
+{% assign posts = site.news | where_exp: "post", "post.draft != true" | sort: "date" | reverse %}
+{% for post in posts %}
+## {{ post.title | xml_escape }}
+
+URL: {{ site.url }}{{ post.url }}
+
+Published: {{ post.date | date: "%Y-%m-%d" }}
+
+{% if post.description %}{{ post.description | strip_html | normalize_whitespace }}{% endif %}
+
+{{ post.content | strip_html | normalize_whitespace }}
+{% endfor %}

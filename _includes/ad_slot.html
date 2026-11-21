@@ -1,0 +1,32 @@
+{%- comment -%}
+    Ad slot renderer — slot name `include.slot` (e.g. "post_top").
+    Sab kuch `_data/ads.yml` se aata hai, jo Decap CMS se edit hota hai.
+    Social format ka unit bina kisi wrapper ke render hota hai (overlay script).
+{%- endcomment -%}
+{%- if site.data.ads.enabled -%}
+    {%- assign placement = site.data.ads.placements | where: "slot", include.slot | first -%}
+    {%- if placement and placement.units.size > 0 -%}
+        {%- for unit_id in placement.units -%}
+            {%- assign unit = site.data.ads.units | where: "id", unit_id | first -%}
+            {%- if unit and unit.enabled != false -%}
+                {%- assign unit_code = unit.code | default: "" | strip -%}
+                {%- if unit.format == "social" -%}
+                    {%- if unit_code != "" -%}
+{{ unit.code }}
+                    {%- endif -%}
+                {%- else -%}
+<div class="ad-slot ad-slot--{{ include.slot }}" role="complementary" aria-label="Advertisement">
+    <span class="ad-slot__label">Advertisement</span>
+    <div class="ad-slot__inner">
+        {%- if unit.format == "smartlink" and unit.url -%}
+        <a class="ad-slot__smartlink" href="{{ unit.url }}" target="_blank" rel="noopener sponsored">{{ unit.label_text | default: "Sponsored link" }}</a>
+        {%- elsif unit_code != "" -%}
+        {{ unit.code }}
+        {%- endif -%}
+    </div>
+</div>
+                {%- endif -%}
+            {%- endif -%}
+        {%- endfor -%}
+    {%- endif -%}
+{%- endif -%}

@@ -12,3 +12,4 @@ run.bat
 # Local agent config (keep the design-system reference tracked)
 .claude/settings.local.json
 .claude/komi/
+todo.md

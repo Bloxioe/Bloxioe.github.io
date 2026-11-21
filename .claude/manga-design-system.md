@@ -1,6 +1,6 @@
-# Abdul Mueed — Manga Design System (SSOT)
+# Bloxioe — Manga Design System (SSOT)
 
-Single source of truth for the inked-comic redesign of the Abdul Mueed marketing site
+Single source of truth for the inked-comic redesign of the Bloxioe marketing site
 (Jekyll, `github-store.org`). Every page MUST conform to this. When a page deviates,
 fix the page — never fork the rules.
 

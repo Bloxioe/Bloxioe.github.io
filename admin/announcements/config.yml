@@ -2,12 +2,12 @@ backend:
   name: github
   repo: komi-store/komi-store-backend
   branch: main
-  base_url: https://decap-proxy.am-abdulmueed.workers.dev
+  base_url: https://bloxioe-decap-proxy.bloxioe.workers.dev
 
 publish_mode: editorial_workflow
 
-site_url: https://am-abdulmueed.github.io
-display_url: https://am-abdulmueed.github.io
+site_url: https://bloxioe.github.io
+display_url: https://bloxioe.github.io
 
 media_folder: assets/uploads
 public_folder: /assets/uploads

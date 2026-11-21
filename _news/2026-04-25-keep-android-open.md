@@ -1,8 +1,12 @@
 ---
 title: "Keep Android Open: where PluginStream stands"
+image: ""
 description: Our public position on Google's developer-verification policy — and
   the three commitments that come with it.
 date: 2026-04-25
+categories:
+  - Open Source
+  - Announcements
 tags:
   - policy
   - android
@@ -66,4 +70,4 @@ If we hadn't shipped this position, PluginStream would still be a useful product
 
 We also think that being unambiguous about where we stand is more honest than the typical posture of "we're neutral on policy, we just ship software." Software shapes what's possible; "neutral" is a position. We'd rather pick the position than pretend we don't have one.
 
-\- Abdul Mueed
+\- Bloxioe

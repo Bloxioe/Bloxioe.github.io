@@ -11,7 +11,12 @@
     <main>
         {{ content }}
     </main>
+    {%- assign global_ads = site.data.ads.placements | where: "slot", "global_bottom" -%}
+    {%- if site.data.ads.enabled and global_ads.size > 0 -%}
+    <div class="container">{% include ad_slot.html slot="global_bottom" %}</div>
+    {%- endif -%}
     {% include footer.html %}
     {% include scripts.html %}
+    {% include ad_slot.html slot="site_wide" %}
 </body>
 </html>

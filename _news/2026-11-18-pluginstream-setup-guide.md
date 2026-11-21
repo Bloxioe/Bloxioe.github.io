@@ -2,6 +2,9 @@
 title: "PluginStream — free, ad-free streaming on Android and how its plugin system works"
 description: A walk through PluginStream, the open-source Android streaming app. What it does, how the plugin and repository system works, and how to set it up in six steps.
 date: 2026-11-18
+categories:
+  - Tutorials
+  - Android
 tags:
   - pluginstream
   - android

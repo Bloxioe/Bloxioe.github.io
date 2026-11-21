@@ -1,222 +1,159 @@
 ---
 layout: default
-title_full: Abdul Mueed Features — PluginStream & Open-Source Projects
 title: Features
-description: PluginStream features plus the rest of Abdul Mueed's open-source work — trending GitHub discovery, silent install via Shizuku/Dhizuku, signing-key verified auto-update, a mirror system, and projects like CodeBin, AI-Base and MySocials.
-keywords: Abdul Mueed, PluginStream features, Abdul Mueed projects, shizuku silent install, dhizuku, obtainium import, apk inspect, github releases auto update, signing key verification, kotlin android app, next.js projects, open source developer
+title_full: Features — Bloxioe Blog
+description: What this blog offers — timely technology coverage, tutorials, open-source build logs, browsable sections, a full-content RSS feed, and free access supported by advertising.
+keywords: Bloxioe blog features, developer blog, tutorials, open source, RSS feed, PluginStream, CodeBin, AI-Base
 permalink: /features/
 ---
 
+{% assign posts = site.news | where_exp: "post", "post.draft != true" | sort: "date" | reverse %}
+{% capture cat_str %}{% for post in posts %}{% for cat in post.categories %}{% if cat and cat != "" %}{{ cat }}|{% endif %}{% endfor %}{% endfor %}{% endcapture %}
+{% assign all_cats = cat_str | split: "|" | uniq | sort %}
+
+<style>
+    .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; }
+    .cat-card {
+        display: flex; flex-direction: column; gap: 6px;
+        padding: 20px;
+        background: var(--surface);
+        border: var(--bw-panel) solid var(--ink);
+        box-shadow: var(--sh-panel);
+        transition: transform 110ms var(--ease), box-shadow 110ms var(--ease);
+    }
+    .cat-card:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 var(--shadow); }
+    .cat-card__name {
+        font-family: var(--font-display);
+        text-transform: uppercase;
+        font-size: 1.25rem;
+        line-height: 1;
+        color: var(--ink);
+    }
+    .cat-card__count { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--ink-soft); }
+</style>
+
+<!-- ═══ Hero ═══ -->
 <section class="page-hero container">
     <div class="page-hero__inner">
         <p class="section-header__overline">Features</p>
-        <h1 class="page-hero__title">What I build</h1>
-        <p class="page-hero__subtitle">PluginStream is the flagship — GitHub-release discovery, silent install and update, an <a href="/extensions/">extension architecture</a> fed by the community, and an honest, self-hostable backend. Below it, the open-source projects I maintain alongside.</p>
+        <h1 class="page-hero__title">A blog built for reading</h1>
+        <p class="page-hero__subtitle">
+            No algorithmic feed or paywall. Read essays, timely technology coverage, tutorials and build logs — organised into sections and delivered as a feed you can subscribe to. Ads may appear to support the site.
+        </p>
         <div class="page-hero__actions">
-            <a href="/download/" class="btn btn--filled">Get PluginStream</a>
-            <a href="https://github.com/am-abdulmueed/pluginstream/wiki" class="btn btn--tonal" target="_blank" rel="noopener">Read the Wiki</a>
+            <a href="/blog/" class="btn btn--filled">Start reading</a>
+            <a href="/blog/feed.xml" class="btn btn--outlined">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.18 17.82a2.18 2.18 0 1 1-4.36 0 2.18 2.18 0 0 1 4.36 0zM1.82 8.09v3.05c6.11 0 11.04 4.93 11.04 11.04h3.05C15.91 14.29 9.71 8.09 1.82 8.09zM1.82 1.82v3.05c9.55 0 17.31 7.76 17.31 17.31h3.05C22.18 11.05 12.95 1.82 1.82 1.82z"/></svg>
+                Subscribe via RSS
+            </a>
         </div>
     </div>
 </section>
 
-<!-- ═══ PluginStream ═══ -->
-<div class="container">
-    <div class="section-header reveal">
-        <p class="section-header__overline">Flagship app</p>
-        <h2 class="section-header__title">PluginStream, up close</h2>
-    </div>
-</div>
-
-<section class="features-highlight container">
-    <article class="feature-highlight">
-        <h2>Smart discovery</h2>
-        <p>Trending, hot, and most popular GitHub projects, ranked per platform. Only repos that ship installable assets show up — zero source-only noise.</p>
-    </article>
-
-    <article class="feature-highlight">
-        <h2>One-tap install</h2>
-        <p>The right binary downloads and hands off to your OS — APK on Android, EXE/MSI on Windows, DMG/PKG on macOS, AppImage/DEB/RPM/pacman on Linux.</p>
-    </article>
-
-    <article class="feature-highlight">
-        <h2>Silent install &amp; auto-update</h2>
-        <p>Shizuku, Sui, or Dhizuku installs without prompts on Android. Background update checks notify you; auto-update applies them while you sleep.</p>
-    </article>
-
-    <article class="feature-highlight">
-        <h2>Signing-key verification</h2>
-        <p>Auto-update is blocked the moment a new APK's signing key drifts from what the row was registered with. Prevents silent compromise on a hijacked release.</p>
-    </article>
-
-    <article class="feature-highlight">
-        <h2>Mirror system</h2>
-        <p>Multi-source race against the GitHub CDN with end-to-end SHA-256 verification against GitHub's published digests. Keeps installs working where <code>github.com</code> is throttled.</p>
-    </article>
-
-    <article class="feature-highlight">
-        <h2>Library imports</h2>
-        <p>Obtainium import/export in one tap. Library Imports also recognises GitHub-sourced apps already on your device — sideloaded, F-Droid, manual installs.</p>
-    </article>
-
-    <article class="feature-highlight">
-        <h2>APK Inspect</h2>
-        <p>Peek inside any release before installing — app label, signing fingerprint, version codes, min/target SDK, components, and permissions colour-coded by protection level.</p>
-    </article>
-
-    <article class="feature-highlight">
-        <h2>Open-source backend</h2>
-        <p>Apache-2.0 and self-hostable. Search queries are hashed client-side, IP addresses are not stored, and the same data flows whether you're signed in or not.</p>
-    </article>
-</section>
-
-<!-- ═══ More open-source projects ═══ -->
-<section id="projects">
+<!-- ═══ What you get ═══ -->
+<section class="features">
     <div class="container">
         <div class="section-header reveal">
-            <p class="section-header__overline">More projects</p>
-            <h2 class="section-header__title">Also open source</h2>
+            <p class="section-header__overline">What you get</p>
+            <h2 class="section-header__title">Everything, for free</h2>
+            <p class="section-header__subtitle">Every post is written by hand, published in the open and readable on any device.</p>
         </div>
-        <ul class="news-list__items reveal-stagger">
-            <li class="news-list__item reveal">
-                <h3 class="news-list__title">CodeBin</h3>
-                <p class="news-list__excerpt">A web app for storing and sharing code snippets with live output. Write a snippet, see what it does, and share it with anyone through a unique link.</p>
-                <p class="news-list__tags">
-                    <span class="news-list__tag">JavaScript</span>
-                    <span class="news-list__tag">Next.js</span>
-                    <span class="news-list__tag">Tailwind CSS</span>
-                    <span class="news-list__tag">Firebase</span>
-                    <span class="news-list__tag">In development</span>
-                </p>
-                <div class="project-actions">
-                    <a class="btn btn--filled" href="/project/?repo=codebin">View details</a>
-                    <a class="news-list__rss" href="https://github.com/am-abdulmueed/codebin" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a class="news-list__rss" href="https://am-codebin.vercel.app/" target="_blank" rel="noopener noreferrer">Live site</a>
+
+        <div class="features__grid reveal-stagger">
+            <article class="feature-card reveal">
+                <div class="feature-card__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
                 </div>
-            </li>
-            <li class="news-list__item reveal">
-                <h3 class="news-list__title">AI-Base</h3>
-                <p class="news-list__excerpt">An open-source, community-driven directory to discover AI tools — chatbots, image generators, code generators and prompts, all in one place.</p>
-                <p class="news-list__tags">
-                    <span class="news-list__tag">JavaScript</span>
-                    <span class="news-list__tag">Open Source</span>
-                    <span class="news-list__tag">MIT License</span>
-                </p>
-                <div class="project-actions">
-                    <a class="btn btn--filled" href="/project/?repo=ai-base">View details</a>
-                    <a class="news-list__rss" href="https://github.com/am-abdulmueed/ai-base" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a class="news-list__rss" href="https://am-aibase.vercel.app/" target="_blank" rel="noopener noreferrer">Live site</a>
+                <h3 class="feature-card__title">Deep-dive tutorials</h3>
+                <p class="feature-card__desc">Step-by-step setup guides and walkthroughs — like getting PluginStream running, wiring up plugins, or building a small web tool from scratch.</p>
+            </article>
+
+            <article class="feature-card reveal">
+                <div class="feature-card__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                 </div>
-            </li>
-            <li class="news-list__item reveal">
-                <h3 class="news-list__title">MySocials</h3>
-                <p class="news-list__excerpt">An open-source link-in-bio tool that simplifies how you manage and share your social media links. Every profile link lives in one clean page you fully control.</p>
-                <p class="news-list__tags">
-                    <span class="news-list__tag">Next.js</span>
-                    <span class="news-list__tag">MongoDB</span>
-                    <span class="news-list__tag">Shadcn UI</span>
-                    <span class="news-list__tag">Tailwind CSS</span>
-                </p>
-                <div class="project-actions">
-                    <a class="btn btn--filled" href="/project/?repo=MySocials">View details</a>
-                    <a class="news-list__rss" href="https://github.com/am-abdulmueed/MySocials" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a class="news-list__rss" href="https://msocials.vercel.app/" target="_blank" rel="noopener noreferrer">Live site</a>
+                <h3 class="feature-card__title">Build logs, in the open</h3>
+                <p class="feature-card__desc">Notes from real projects — PluginStream, CodeBin, AI-Base and more. What worked, what broke, and why I made each call.</p>
+            </article>
+
+            <article class="feature-card reveal">
+                <div class="feature-card__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.41 11.58l-9-9A2 2 0 0 0 11 2H4a2 2 0 0 0-2 2v7c0 .55.22 1.05.59 1.42l9 9A2 2 0 0 0 13 22a2 2 0 0 0 1.41-.59l7-7A2 2 0 0 0 22 13a2 2 0 0 0-.59-1.42zM6.5 8A1.5 1.5 0 1 1 8 6.5 1.5 1.5 0 0 1 6.5 8z"/></svg>
                 </div>
-            </li>
-            <li class="news-list__item reveal">
-                <h3 class="news-list__title">url-sh</h3>
-                <p class="news-list__excerpt">A supercharged URL shortener built with Next.js 14 and MongoDB. Paste a long link, get a short one back, and track how it is used.</p>
-                <p class="news-list__tags">
-                    <span class="news-list__tag">Next.js 14</span>
-                    <span class="news-list__tag">MongoDB</span>
-                    <span class="news-list__tag">JavaScript</span>
-                </p>
-                <div class="project-actions">
-                    <a class="btn btn--filled" href="/project/?repo=url-sh">View details</a>
-                    <a class="news-list__rss" href="https://github.com/am-abdulmueed/url-sh" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a class="news-list__rss" href="https://url-shs.vercel.app/" target="_blank" rel="noopener noreferrer">Live site</a>
+                <h3 class="feature-card__title">Organised into sections</h3>
+                <p class="feature-card__desc">Every post is filed under one or more sections — Tech, Tutorials, Open Source, Android, Web Dev and more. Jump straight to what you care about.</p>
+            </article>
+
+            <article class="feature-card reveal">
+                <div class="feature-card__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.18 17.82a2.18 2.18 0 1 1-4.36 0 2.18 2.18 0 0 1 4.36 0zM1.82 8.09v3.05c6.11 0 11.04 4.93 11.04 11.04h3.05C15.91 14.29 9.71 8.09 1.82 8.09zM1.82 1.82v3.05c9.55 0 17.31 7.76 17.31 17.31h3.05C22.18 11.05 12.95 1.82 1.82 1.82z"/></svg>
                 </div>
-            </li>
-            <li class="news-list__item reveal">
-                <h3 class="news-list__title">IDE</h3>
-                <p class="news-list__excerpt">A lightweight online HTML, CSS and JavaScript editor that runs in the browser. Write code, hit run, and see the result instantly.</p>
-                <p class="news-list__tags">
-                    <span class="news-list__tag">Next.js</span>
-                    <span class="news-list__tag">Tailwind CSS</span>
-                    <span class="news-list__tag">Shadcn UI</span>
-                </p>
-                <div class="project-actions">
-                    <a class="btn btn--filled" href="/project/?repo=IDE">View details</a>
-                    <a class="news-list__rss" href="https://github.com/am-abdulmueed/IDE" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a class="news-list__rss" href="https://ide-alpha.vercel.app/" target="_blank" rel="noopener noreferrer">Live site</a>
+                <h3 class="feature-card__title">RSS, no algorithm</h3>
+                <p class="feature-card__desc">A clean RSS feed you can drop into any reader. No email required, no tracking pixels, no feed that decides what you see.</p>
+            </article>
+
+            <article class="feature-card reveal">
+                <div class="feature-card__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18V4a8 8 0 0 1 0 16z"/></svg>
                 </div>
-            </li>
-            <li class="news-list__item reveal">
-                <h3 class="news-list__title">Portfolio</h3>
-                <p class="news-list__excerpt">A high-performance portfolio website with immersive animations and a glassmorphism interface — plus a real-time PDF resume generator.</p>
-                <p class="news-list__tags">
-                    <span class="news-list__tag">Next.js 14</span>
-                    <span class="news-list__tag">Tailwind</span>
-                    <span class="news-list__tag">Framer Motion</span>
-                    <span class="news-list__tag">MIT License</span>
-                </p>
-                <div class="project-actions">
-                    <a class="btn btn--filled" href="/project/?repo=portfolio">View details</a>
-                    <a class="news-list__rss" href="https://github.com/am-abdulmueed/portfolio" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a class="news-list__rss" href="https://am-abdulmueed.vercel.app/" target="_blank" rel="noopener noreferrer">Live site</a>
+                <h3 class="feature-card__title">Light &amp; dark reading</h3>
+                <p class="feature-card__desc">A manga-inked theme that flips between light and dark with one tap, stays fast, and reads well on a phone at midnight.</p>
+            </article>
+
+            <article class="feature-card reveal">
+                <div class="feature-card__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 15-4-4 1.41-1.41L10 13.17l6.59-6.59L18 8l-8 8z"/></svg>
                 </div>
-            </li>
-            <li class="news-list__item reveal">
-                <h3 class="news-list__title">NexGama</h3>
-                <p class="news-list__excerpt">A modern game aggregator designed with a premium Over-The-Top streaming UI. Track, discover and explore gaming platforms, titles and updates in one place.</p>
-                <p class="news-list__tags">
-                    <span class="news-list__tag">HTML</span>
-                    <span class="news-list__tag">Cross-platform</span>
-                    <span class="news-list__tag">Coming soon</span>
-                </p>
-                <div class="project-actions">
-                    <a class="btn btn--filled" href="/project/?repo=nexgama">View details</a>
-                    <a class="news-list__rss" href="https://github.com/am-abdulmueed/nexgama" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a class="news-list__rss" href="https://nexgama.vercel.app/" target="_blank" rel="noopener noreferrer">Live site</a>
-                </div>
-            </li>
-        </ul>
-        <div class="cta__buttons reveal">
-            <a class="btn btn--outlined" href="https://github.com/am-abdulmueed?tab=repositories" target="_blank" rel="noopener noreferrer">All repositories on GitHub</a>
+                <h3 class="feature-card__title">Free to read</h3>
+                <p class="feature-card__desc">Posts are not behind a paywall. Ads served by Adsterra may appear to help support the site.</p>
+            </article>
         </div>
     </div>
 </section>
 
-<section class="get-listed" id="developers">
+<!-- ═══ Sections ═══ -->
+{% if all_cats.size > 0 %}
+<section id="sections">
     <div class="container">
-        <div class="get-listed__card reveal-scale">
-            <div>
-                <h2 class="get-listed__title">Get your app listed</h2>
-                <p class="get-listed__desc">No manual submission needed. PluginStream uses the public Search API — if your project meets these conditions, it appears automatically.</p>
-                <a href="https://github.com/am-abdulmueed/pluginstream/wiki" class="get-listed__btn" target="_blank" rel="noopener">
-                    Read the Wiki
-                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-                </a>
-            </div>
-            <div>
-                <ul class="checklist">
-                    <li><span class="check-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span> Public repository on GitHub</li>
-                    <li><span class="check-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span> At least one published, non-draft release</li>
-                    <li><span class="check-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span> Installable assets (.apk, .exe, .msi, .dmg, .pkg, .deb, .rpm, .AppImage)</li>
-                    <li><span class="check-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span> Relevant topics and description for discoverability</li>
-                </ul>
-            </div>
+        <div class="section-header reveal">
+            <p class="section-header__overline">Sections</p>
+            <h2 class="section-header__title">Pick your topic</h2>
+            <p class="section-header__subtitle">Every post lives under one or more sections. Tap one to filter the blog.</p>
+        </div>
+        <div class="cat-grid reveal-stagger">
+            {% for cat in all_cats %}
+            {% assign cat_count = 0 %}
+            {% for post in posts %}{% if post.categories contains cat %}{% assign cat_count = cat_count | plus: 1 %}{% endif %}{% endfor %}
+            <a class="cat-card reveal" href="/blog/?category={{ cat | slugify }}">
+                <span class="cat-card__name">{{ cat }}</span>
+                <span class="cat-card__count">{{ cat_count }} {% if cat_count == 1 %}post{% else %}posts{% endif %}</span>
+            </a>
+            {% endfor %}
         </div>
     </div>
 </section>
+{% endif %}
 
-<section class="cta">
+<!-- ═══ Newsletter ═══ -->
+{% if site.buttondown_username and site.buttondown_username != "" %}
+<section id="newsletter">
+    <div class="container">
+        <div class="blog-newsletter reveal">
+            {% include newsletter.html id="features" title="Never miss a post" subtitle="Roughly one essay every 2 weeks. Engineering notes, tutorials and release breakdowns. No spam." %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- ═══ CTA ═══ -->
+<section class="cta" id="contact">
     <div class="container">
         <div class="cta__inner reveal">
-            <h2 class="cta__title">Ready to install?</h2>
-            <p class="cta__desc">Pick your platform on the download page or jump straight to the latest release on GitHub.</p>
+            <h2 class="cta__title">Got a topic in mind?</h2>
+            <p class="cta__desc">If you want me to write about something — a tool, a bug you're stuck on, or a feature in one of my projects — send it through the <a href="/contact/">contact form</a>.</p>
             <div class="cta__buttons">
-                <a href="/download/" class="btn btn--filled">All download options</a>
-                <a href="https://github.com/am-abdulmueed/pluginstream/releases/latest" class="btn btn--tonal" target="_blank" rel="noopener">Latest release</a>
+                <a href="/contact/" class="btn btn--filled">Suggest a topic</a>
+                <a href="/blog/" class="btn btn--outlined">Read the blog</a>
             </div>
         </div>
     </div>

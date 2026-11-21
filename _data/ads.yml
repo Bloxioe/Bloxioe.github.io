@@ -1,0 +1,72 @@
+enabled: true
+units:
+  - enabled: true
+    id: social
+    label: Social Bar (site-wide)
+    format: social
+    code: <script data-cfasync="false"
+      src="https://bauval.org/14/ea1fa27136a6d83c33c92377a05d9835"></script>
+    url: ""
+    label_text: ""
+  - enabled: true
+    id: native
+    label: Native Banner
+    format: native
+    code: <script async="async" data-cfasync="false"
+      src="https://bauval.org/21/e23f79452bf46140683f692400902cb1"></script><div
+      id="container-e23f79452bf46140683f692400902cb1"></div>
+    url: ""
+    label_text: ""
+  - enabled: true
+    id: banner
+    label: Banner 320×50
+    format: banner
+    code: >
+      <script>
+        atOptions = {
+          'key' : 'c2086cfba9e014871d6c922ee4d4fc7d',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+
+      <script src="https://bauval.org/22/c2086cfba9e014871d6c922ee4d4fc7d"></script>
+    url: ""
+    label_text: ""
+  - enabled: true
+    id: smartlink
+    label: Smartlink
+    format: smartlink
+    code: ""
+    url: https://araplhn.org/4/f519c85fcec02806da8619567ecd9785
+    label_text: Sponsored link
+placements:
+  - slot: site_wide
+    units:
+      - social
+  - slot: home_top
+    units:
+      - banner
+  - slot: home_mid
+    units:
+      - native
+  - slot: home_bottom
+    units:
+      - smartlink
+  - slot: blog_top
+    units:
+      - banner
+  - slot: blog_bottom
+    units:
+      - native
+  - slot: post_top
+    units:
+      - banner
+  - slot: post_middle
+    units:
+      - native
+  - slot: post_bottom
+    units:
+      - smartlink

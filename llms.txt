@@ -1,38 +1,33 @@
-# Abdul Mueed
+---
+layout: null
+---
+# Bloxioe's Blog
 
-> Full Stack Developer from Pakistan. Creator of PluginStream, CodeBin and AI-Base. Open-source Android and web apps built in Kotlin, Next.js and JavaScript.
+> A personal blog by Bloxioe about technology, software development, open source, and current developments. Posts are written and curated by the author; they may include news commentary, tutorials, project notes, and opinion. RSS and this index are generated from the site's published content at build time.
 
-## Core pages
+## Main pages
 
-- [Homepage](https://am-abdulmueed.github.io/): Who Abdul Mueed is, the stack he works in, and the projects he maintains.
-- [Download](https://am-abdulmueed.github.io/download/): Android install guide for PluginStream. Direct APK pulled live from GitHub releases, version history, and release notes for every tag. F-Droid and Play Store coming soon.
-- [Features](https://am-abdulmueed.github.io/features/): PluginStream's feature set in detail — discovery, silent install, auto-update, mirroring — plus the other open-source projects Abdul Mueed maintains.
-- [Extensions](https://am-abdulmueed.github.io/extensions/): How PluginStream's extension and repository system works. Six-step setup guide for the `pluginstream` shortcode, plus the full list of community repositories bundled with it.
-- [Project details](https://am-abdulmueed.github.io/project/): Per-repository detail view — README, stats and links fetched live from the GitHub API. Pass `?repo=<name>` to load a specific repository.
-- [Contact](https://am-abdulmueed.github.io/contact/): Contact form for bug reports, plugin submissions, press and sponsorship. Messages go straight to the developer's inbox.
-- [Blog](https://am-abdulmueed.github.io/blog/): Release notes, setup guides, and notes on building open-source software.
-- [Blog RSS](https://am-abdulmueed.github.io/blog/feed.xml): RSS 2.0 feed of the latest posts.
-- [Privacy Policy](https://am-abdulmueed.github.io/privacy-policy/): Privacy-first explainer. No personal data collected by default.
+{% assign public_pages = site.pages | sort: "url" %}
+{% for page in public_pages %}
+{% if page.title or page.title_full %}
+{% if page.sitemap != false and page.noindex != true %}
+{% unless page.url contains "/admin/" or page.url contains "/app/" or page.url == "/llms.txt" or page.url == "/llms-full.txt" or page.url == "/blog/feed.xml" %}
+- [{{ page.title | default: page.title_full }}]({{ site.url }}{{ page.url }}){% if page.description %}: {{ page.description | strip_html | normalize_whitespace }}{% endif %}
+{% endunless %}
+{% endif %}
+{% endif %}
+{% endfor %}
 
-## Projects
+## Published blog posts
 
-- [PluginStream](https://github.com/am-abdulmueed/pluginstream): Free, ad-free Android streaming app with a plugin and extension architecture and 100+ OTT plugins. Kotlin. Distributed as a direct APK from GitHub releases.
-- [CodeBin](https://am-codebin.vercel.app/): Store and share code snippets with live output, shareable by unique link. Next.js, Tailwind, Firebase. In development.
-- [AI-Base](https://am-aibase.vercel.app/): Open-source directory of AI tools, chatbots, image and code generators. JavaScript, MIT.
-- [MySocials](https://msocials.vercel.app/): Open-source link-in-bio page you fully control. Next.js, MongoDB, Shadcn UI.
-- [url-sh](https://url-shs.vercel.app/): Fast URL shortener with custom links and click tracking. Next.js 14, MongoDB.
-- [IDE](https://ide-alpha.vercel.app/): Browser HTML / CSS / JS editor with instant preview. Next.js, Tailwind, Shadcn UI.
-- [Portfolio](https://am-abdulmueed.vercel.app/): Personal portfolio with Framer Motion animations, three themes and a real-time PDF resume generator. MIT.
-- [NexGama](https://nexgama.vercel.app/): Game aggregator with an OTT-style interface. Coming soon.
+{% assign posts = site.news | where_exp: "post", "post.draft != true" | sort: "date" | reverse %}
+{% for post in posts %}
+- [{{ post.title }}]({{ site.url }}{{ post.url }}) ({{ post.date | date: "%Y-%m-%d" }}){% if post.description %}: {{ post.description | strip_html | normalize_whitespace }}{% endif %}
+{% endfor %}
 
-## Project resources
+## Feeds and full text
 
-- [GitHub profile](https://github.com/am-abdulmueed): Source code, releases and issue tracker for every project.
-- [PluginStream releases](https://github.com/am-abdulmueed/pluginstream/releases): Latest signed APK for every version.
-- [PluginStream docs](https://pluginstream.pages.dev): Install guide, plugin shortcode, extension setup and FAQ.
-- [PluginStream Telegram](https://t.me/pluginstreamofficial): Community support and release announcements.
-
-## Optional
-
-- [Sitemap (XML)](https://am-abdulmueed.github.io/sitemap.xml): Machine-readable URL list.
-- [robots.txt](https://am-abdulmueed.github.io/robots.txt): Crawler directives.
+- [Blog RSS feed]({{ site.url }}/blog/feed.xml): Full content of every published blog post; refreshed whenever the site is built.
+- [Full site text]({{ site.url }}/llms-full.txt): Text versions of public pages and published blog posts, generated from the current site content.
+- [XML sitemap]({{ site.url }}/sitemap.xml): Public site URLs.
+- [Contact]({{ site.url }}/contact/): Send feedback, corrections, or a topic suggestion.

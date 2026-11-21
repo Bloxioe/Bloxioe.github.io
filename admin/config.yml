@@ -1,25 +1,41 @@
-# localhost par Decap ka local proxy (npx decap-server) use karo —
-# GitHub OAuth/repo access ki zarurat nahi, changes seedha disk par likhte hain.
-# Yeh sirf localhost par activate hota hai; live site par koi asar nahi.
+# ─────────────────────────────────────────────────────────────
+# Decap CMS — LOCAL setup (default)
+# ─────────────────────────────────────────────────────────────
+# Local par edits seedha disk par likhe jate hain — GitHub OAuth,
+# Cloudflare proxy ya kisi live config ki zarurat nahi.
 #
-# GitHub login (OAuth) test karna ho to ise comment kar do:
+# Chalane ka tareeqa (do terminals):
+#   1) npx decap-server            (ya: server.bat)  → port 8081
+#   2) bundle exec jekyll serve    → http://localhost:4000
+#   Phir browser mein kholo        → http://localhost:4000/admin/
+#
+# Live (GitHub OAuth) par publish karna ho to:
+#   - neeche `local_backend` ko false karo
+#   - `base_url` line ko uncomment karo
+#   - `display_url` ko live URL par set karo
+# ─────────────────────────────────────────────────────────────
 local_backend: true
 
 backend:
   name: github
   repo: am-abdulmueed/am-abdulmueed.github.io
   branch: main
-  base_url: https://decap-proxy.am-abdulmueed.workers.dev
+  # Sirf live admin ke liye zaroori (GitHub OAuth proxy). Local par iski zarurat nahi:
+  # base_url: https://bloxioe-decap-proxy.bloxioe.workers.dev
 
-site_url: https://am-abdulmueed.github.io
-display_url: https://am-abdulmueed.github.io
+site_url: https://bloxioe.github.io
+# CMS ke "View Live" button ka target — local par localhost khulta hai:
+display_url: http://localhost:4000/
+# Live par neeche wali line use karo:
+# display_url: https://bloxioe.github.io
 
 media_folder: assets/uploads
 public_folder: /assets/uploads
 
 collections:
   - name: news
-    label: News Posts
+    label: Blog Posts
+    label_singular: Blog Post
     folder: _news
     create: true
     delete: true
@@ -30,18 +46,29 @@ collections:
     summary: "{{title}} — {{date | date('YYYY-MM-DD')}}"
     preview_path: "blog/{{slug}}"
     fields:
-      - { name: title, label: Title, widget: string, hint: "Used as page title and in the news listing." }
-      - { name: slug, label: URL slug, widget: string, required: false, pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Lowercase letters, numbers, and hyphens only — e.g. how-github-store-started'], hint: "Custom URL slug. The post URL becomes /blog/<slug>/. Lowercase, hyphens only. Leave blank to auto-derive from filename." }
-      - { name: description, label: Lede, widget: string, required: false, hint: "One-sentence summary shown under the title and in feeds." }
-      - { name: date, label: Date, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { name: source, label: Paste complete Markdown file, widget: code, default_language: markdown, allow_language_selection: false, output_code_only: true, required: false, hint: "Poora Markdown file yahan paste karo — opening/closing --- front matter samet. Paste karne par neeche ke fields isi data se replace honge; khali chhoro to neeche ke fields manually bharo." }
+      - { name: title, label: Title, widget: string, required: false, hint: "Post ka title — listing aur page par dikhta hai." }
+      - { name: slug, label: URL slug, widget: string, required: false, pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', 'Sirf lowercase letters, numbers aur hyphens — misal: how-github-store-started'], hint: "Custom URL slug. Post ka URL banega /blog/<slug>/. Khali chhor do to filename se ban jayega." }
+      - { name: image, label: Featured image, widget: image, required: false, hint: "Post ke sabse upar dikhne wali cover image. Recommended 1200×630." }
+      - { name: image_alt, label: Featured image alt text, widget: string, required: false, hint: "Image ka description (accessibility + SEO). Khali chhor do to title use hoga." }
+      - { name: description, label: Lede, widget: string, required: false, hint: "Ek line ka summary — title ke neeche aur feeds mein dikhta hai." }
+      - { name: date, label: Date, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false }
+      - name: categories
+        label: Categories (sections)
+        widget: select
+        required: false
+        multiple: true
+        options: ["Tech", "Tutorials", "Projects", "Open Source", "Android", "Web Dev", "Personal", "Announcements", "Thoughts", "Development"]
+        hint: "Blog ki sections. Blog page par inhi se filter hota hai. Nayi section chahiye to config mein options update kar do."
       - name: tags
         label: Tags
         widget: list
         required: false
+        hint: "Chhote keywords, free text."
         field: { name: tag, widget: string }
-      - { name: redirect_from, label: Redirect from (legacy URLs), widget: list, required: false, hint: "Old URLs to 301 to this post. Useful if you change the slug after publishing.", field: { name: url, widget: string } }
-      - { name: draft, label: Draft, widget: boolean, default: false, required: false, hint: "Draft posts are not published." }
-      - { name: body, label: Body, widget: markdown }
+      - { name: redirect_from, label: Redirect from (legacy URLs), widget: list, required: false, hint: "Purane URLs jo yahan 301 ho jayein. Slug badalne par kaam aata hai.", field: { name: url, widget: string } }
+      - { name: draft, label: Draft, widget: boolean, default: false, required: false, hint: "Draft posts publish nahi hote." }
+      - { name: body, label: Body, widget: markdown, required: false }
 
   - name: ads_files
     label: Ads Files
@@ -72,3 +99,51 @@ collections:
             default_language: properties
             allow_language_selection: false
             hint: "Plain text only. One record per line: <domain>, <publisher-id>, <relationship>, <cert-id>. Lines starting with # are comments."
+
+  - name: ads
+    label: Ads
+    description: "Poori website ke ads — IDs, code aur placements sab yahan se. Master switch off karne par sab ads hat jate hain."
+    editor:
+      preview: false
+    format: yaml
+    files:
+      - name: ads_config
+        label: Ad units & placements
+        file: _data/ads.yml
+        fields:
+          - { name: enabled, label: "All Ads — ON / OFF (master toggle)", widget: boolean, default: true, required: false, hint: "Bas yehi EK switch hai. Poori website ke saare ads isi se chalti hain — native banner, banner, smartlink aur social bar sab. Off karne par kahin bhi koi ad show nahi hoga." }
+          - name: units
+            label: Ad units
+            label_singular: Ad unit
+            widget: list
+            required: false
+            summary: "{{fields.label}} ({{fields.id}})"
+            fields:
+              - { name: enabled, label: "ON / OFF", widget: boolean, default: true, required: false, hint: "Sirf is unit ko band karne ke liye off kar do. Upar wala master toggle off ho to ye bekaar hai." }
+              - { name: id, label: ID, widget: string, hint: "Unique id — placements isi ko refer karte hain (misal: native, banner, smartlink, social)." }
+              - { name: label, label: Label, widget: string, required: false }
+              - { name: format, label: Format, widget: select, options: ["native", "banner", "smartlink", "social"] }
+              - { name: code, label: Code (native / banner / social), widget: text, required: false, hint: "Native, Banner aur Social Bar ke liye pura HTML + <script> paste karo. Smartlink ke liye khali chhor do." }
+              - { name: url, label: URL (smartlink), widget: string, required: false }
+              - { name: label_text, label: Button text (smartlink), widget: string, required: false, default: "Sponsored link" }
+          - name: placements
+            label: Placements (slot → units)
+            widget: list
+            required: false
+            summary: "{{fields.slot}}"
+            fields:
+              - name: slot
+                label: Slot
+                widget: select
+                options:
+                  - site_wide
+                  - home_top
+                  - home_mid
+                  - home_bottom
+                  - blog_top
+                  - blog_bottom
+                  - post_top
+                  - post_middle
+                  - post_bottom
+                  - global_bottom
+              - { name: units, label: Unit IDs, widget: list, required: false, field: { name: id, widget: string } }

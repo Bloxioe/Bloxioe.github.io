@@ -1,8 +1,11 @@
 ---
-title: "Hi, I'm Abdul Mueed — and this is what I build"
+title: "Hi, I'm Bloxioe — and this is what I build"
 description: A short tour of the projects I maintain in the open, from an ad-free
   Android streaming app to a handful of web tools that solve small everyday problems.
 date: 2026-11-18
+categories:
+  - Personal
+  - Projects
 tags:
   - portfolio
   - open-source
@@ -13,7 +16,7 @@ redirect_from:
 draft: false
 ---
 
-I'm **Abdul Mueed**, a full-stack developer from Pakistan. I study Business & Information Technology at Virtual University of Pakistan, and outside of coursework I build and ship software in the open — mostly on [GitHub](https://github.com/am-abdulmueed), mostly in Kotlin and JavaScript.
+I'm **Bloxioe**, a full-stack developer from Pakistan. I study Business & Information Technology at Virtual University of Pakistan, and outside of coursework I build and ship software in the open — mostly on [GitHub](https://github.com/am-abdulmueed), mostly in Kotlin and JavaScript.
 
 This post is a quick map of everything I've got running right now, why each thing exists, and where you can use it.
 
@@ -34,7 +37,7 @@ I also like projects that finish something. A snippet tool you can actually send
 - Quality options from **360p up to 4K**, plus **subtitles and Chromecast**
 - Ships as a **direct APK** from GitHub releases, with true auto-update via Shizuku, Sui or Dhizuku
 
-It's written in Kotlin, it's open source, and it's the project I spend the most time on. [Grab the latest APK](https://am-abdulmueed.github.io/download/) or read the [docs site](https://pluginstream.pages.dev/).
+It's written in Kotlin, it's open source, and it's the project I spend the most time on. [Grab the latest APK](https://github.com/am-abdulmueed/pluginstream/releases/latest) or read the [docs site](https://pluginstream.pages.dev/).
 
 ### Web tools I actually use myself
 
@@ -73,7 +76,7 @@ A few things are in the pipeline: pushing PluginStream further, finishing CodeBi
 If you want to follow along, the best places are:
 
 - [GitHub](https://github.com/am-abdulmueed) — everything I ship lands here first
-- [am-abdulmueed.github.io](https://am-abdulmueed.github.io) — the site you're reading this on
+- [am-abdulmueed.github.io](https://bloxioe.github.io) — the site you're reading this on
 - Email — [hello@am-abdulmueed.me](mailto:hello@am-abdulmueed.me)
 
 Thanks for reading. If one of these projects is useful to you, that's the whole point.

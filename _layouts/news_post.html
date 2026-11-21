@@ -1,15 +1,24 @@
 ---
 layout: default
 ---
+{%- assign cover = page.image | default: "" | strip -%}
 <article class="news-article news-article--post container">
+    {% if cover != "" %}
+    <figure class="news-article__cover">
+        <img src="{{ cover }}"
+             alt="{{ page.image_alt | default: page.title }}"
+             width="1200" height="630"
+             loading="eager" fetchpriority="high" decoding="async">
+    </figure>
+    {% endif %}
     <header class="news-article__header">
         <p class="news-article__meta">
             <time datetime="{{ page.date | date_to_xmlschema }}">
                 {{ page.date | date: "%B %-d, %Y" }}
             </time>
-            {% if page.tags %}
-                {% for tag in page.tags %}
-                    <span class="news-article__tag">{{ tag }}</span>
+            {% if page.categories %}
+                {% for cat in page.categories %}
+                    <a class="news-article__cat" href="/blog/?category={{ cat | slugify }}">{{ cat }}</a>
                 {% endfor %}
             {% endif %}
         </p>
@@ -17,10 +26,27 @@ layout: default
         {% if page.description %}
             <p class="news-article__lede">{{ page.description }}</p>
         {% endif %}
+        {% if page.tags %}
+            <p class="news-article__tags">
+                {% for tag in page.tags %}
+                    <span class="news-article__tag">{{ tag }}</span>
+                {% endfor %}
+            </p>
+        {% endif %}
     </header>
+    {% include ad_slot.html slot="post_top" %}
     <div class="news-article__body">
-        {{ content }}
+        {%- assign ad_parts = content | split: '</p>' -%}
+        {%- if ad_parts.size > 2 -%}
+            {%- assign ad_half = ad_parts.size | divided_by: 2 -%}
+            {{ ad_parts | slice: 0, ad_half | join: '</p>' }}</p>
+            {% include ad_slot.html slot="post_middle" %}
+            {{ ad_parts | slice: ad_half, ad_parts.size | join: '</p>' }}
+        {%- else -%}
+            {{ content }}
+        {%- endif -%}
     </div>
+    {% include ad_slot.html slot="post_bottom" %}
     <footer class="news-article__footer">
         <div class="news-article__newsletter">
             {% include newsletter.html id="post-footer" title="Get the next post" subtitle="One email every 2 weeks. No spam." %}

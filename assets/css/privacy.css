@@ -7,7 +7,7 @@
 }
 
 .privacy-hero {
-    padding: 96px 24px 56px;
+    padding: calc(var(--top-bar-height) + 32px) 24px 56px;
     max-width: 920px;
     margin: 0 auto;
     text-align: left;

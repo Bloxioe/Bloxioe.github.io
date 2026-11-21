@@ -1,7 +1,7 @@
 # gh-store-app-oauth
 
 Cloudflare Worker that runs the GitHub OAuth register/callback hop for the
-Abdul Mueed mobile app with full PKCE. The Jekyll site continues to serve
+Bloxioe mobile app with full PKCE. The Jekyll site continues to serve
 every other path on `github-store.org`; this Worker only owns `/auth/*`.
 
 This is **separate** from the Decap CMS OAuth worker. Do not merge them — they

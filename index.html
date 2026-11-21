@@ -1,20 +1,40 @@
 ---
 layout: default
-title_full: Abdul Mueed — Full Stack Developer & Open-Source Builder
-description: Full Stack Developer from Pakistan. Creator of PluginStream, CodeBin and AI-Base — open-source Android and web apps built in Kotlin and Next.js.
-keywords: Abdul Mueed, full stack developer pakistan, PluginStream, CodeBin, AI-Base, open source android app, apk download, kotlin developer, next.js developer, github releases
+title_full: Bloxioe — Blog
+description: Bloxioe's technology blog covering software development, open source, Android, web tools, current tech news, tutorials, and independent project notes.
+keywords: Bloxioe blog, technology blog, software development, open source, Android development, web development, tech news, tutorials
 homepage: true
 ---
 
+{% assign posts = site.news | where_exp: "post", "post.draft != true" | sort: "date" | reverse %}
+{% capture cat_str %}{% for post in posts %}{% for cat in post.categories %}{% if cat and cat != "" %}{{ cat }}|{% endif %}{% endfor %}{% endfor %}{% endcapture %}
+{% assign all_cats = cat_str | split: "|" | uniq | sort %}
+
 <style>
-    #about .about__lede + .about__lede { margin-top: 14px; }
-    .home-group + .home-group { margin-top: 22px; }
-    .feature-card .about__fact__label + .feature-card__title { margin-top: 10px; }
-    .project-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 16px; }
+    .hero--blog .hero__content { grid-template-columns: minmax(0, 1fr); }
+    .hero--blog .hero__title { max-width: 18ch; }
+    .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; }
+    .cat-card {
+        display: flex; flex-direction: column; gap: 6px;
+        padding: 20px;
+        background: var(--surface);
+        border: var(--bw-panel) solid var(--ink);
+        box-shadow: var(--sh-panel);
+        transition: transform 110ms var(--ease), box-shadow 110ms var(--ease);
+    }
+    .cat-card:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 var(--shadow); }
+    .cat-card__name {
+        font-family: var(--font-display);
+        text-transform: uppercase;
+        font-size: 1.25rem;
+        line-height: 1;
+        color: var(--ink);
+    }
+    .cat-card__count { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--ink-soft); }
 </style>
 
 <!-- ═══ Hero ═══ -->
-<section class="hero">
+<section class="hero hero--blog">
     <div class="hero__bg" aria-hidden="true">
         <div class="hero__speed"></div>
         <div class="hero__tone"></div>
@@ -22,64 +42,31 @@ homepage: true
     <div class="container">
         <div class="hero__content">
             <div class="hero__text">
-                <span class="hero__badge"><span class="hero__badge__dot"></span><span>Available for opportunities</span></span>
-                <h1 class="hero__title">Building digital<br><em>experiences</em> that matter.</h1>
+                <span class="hero__badge"><span class="hero__badge__dot"></span><span>Notes from the build</span></span>
+                <h1 class="hero__title">Writing about <em>code</em>, craft &amp; shipping.</h1>
                 <p class="hero__subtitle">
-                    Hi, I'm <strong>Abdul Mueed</strong>, a Full Stack Developer from Pakistan. I craft fast cross-platform apps and modern web experiences — from Android streaming apps to polished interfaces.
+                    Hi, I'm <strong>Bloxioe</strong> — a full stack developer from Pakistan. This is my blog about software development, open source, current technology, and the projects I'm building.
                 </p>
                 <div class="hero__actions">
-                    <a href="#projects" class="btn btn--filled">Explore my work</a>
-                    <a href="/download/" class="btn btn--tonal">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
-                        Download
+                    <a href="#latest" class="btn btn--filled">Read the latest</a>
+                    <a href="/blog/" class="btn btn--outlined">All posts</a>
+                    <a href="/blog/feed.xml" class="btn btn--tonal">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.18 17.82a2.18 2.18 0 1 1-4.36 0 2.18 2.18 0 0 1 4.36 0zM1.82 8.09v3.05c6.11 0 11.04 4.93 11.04 11.04h3.05C15.91 14.29 9.71 8.09 1.82 8.09zM1.82 1.82v3.05c9.55 0 17.31 7.76 17.31 17.31h3.05C22.18 11.05 12.95 1.82 1.82 1.82z"/></svg>
+                        RSS
                     </a>
-                    <a href="#contact" class="btn btn--outlined">Let's talk</a>
                 </div>
                 <div class="hero__stats">
                     <div class="hero__stat">
-                        <span class="hero__stat__value">8</span>
-                        <span class="hero__stat__label">Featured projects</span>
+                        <span class="hero__stat__value">{{ posts.size }}</span>
+                        <span class="hero__stat__label">Posts</span>
                     </div>
                     <div class="hero__stat">
-                        <span class="hero__stat__value">37+</span>
-                        <span class="hero__stat__label">GitHub repos</span>
+                        <span class="hero__stat__value">{{ all_cats.size }}</span>
+                        <span class="hero__stat__label">Sections</span>
                     </div>
                     <div class="hero__stat">
-                        <span class="hero__stat__value">8</span>
-                        <span class="hero__stat__label">Tech stacks</span>
-                    </div>
-                </div>
-                <p class="hero__trust">
-                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
-                    <span><strong>Pakistan</strong> · BBIT at Virtual University · Open-source builder</span>
-                </p>
-            </div>
-            <div class="hero__visual">
-                <div class="hero__chip hero__chip--1">
-                    <span class="chip__icon chip__icon--teal"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg></span>
-                    Full Stack Developer
-                </div>
-                <div class="hero__chip hero__chip--2">
-                    <span class="chip__icon chip__icon--blue"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg></span>
-                    Open source
-                </div>
-                <div class="hero__chip hero__chip--3">
-                    <span class="chip__icon chip__icon--warm"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></span>
-                    Cross-platform
-                </div>
-                <div class="hero__phone">
-                    <div class="hero__phone-frame">
-                        <picture>
-                            <source type="image/webp"
-                                    srcset="/assets/images/hero/01-320w.webp 320w, /assets/images/hero/01-640w.webp 640w, /assets/images/hero/01-960w.webp 960w"
-                                    sizes="(max-width: 640px) 50vw, 280px">
-                            <img src="/assets/images/hero/01-640w.jpg"
-                                 srcset="/assets/images/hero/01-320w.jpg 320w, /assets/images/hero/01-640w.jpg 640w, /assets/images/hero/01-960w.jpg 960w"
-                                 sizes="(max-width: 640px) 50vw, 280px"
-                                 alt="Abdul Mueed mobile app discover screen with trending GitHub release apps"
-                                 width="320" height="694"
-                                 loading="eager" fetchpriority="high" decoding="async">
-                        </picture>
+                        <span class="hero__stat__value">{% if posts.size > 0 %}{{ posts.first.date | date: "%b %Y" }}{% else %}—{% endif %}</span>
+                        <span class="hero__stat__label">Latest</span>
                     </div>
                 </div>
             </div>
@@ -87,379 +74,114 @@ homepage: true
     </div>
 </section>
 
-<!-- ═══ About ═══ -->
-<section id="about">
+<!-- ═══ Latest posts ═══ -->
+<section id="latest">
     <div class="container">
+        {% include ad_slot.html slot="home_top" %}
         <div class="section-header reveal">
-            <p class="section-header__overline">About me</p>
-            <h2 class="section-header__title">A little about me</h2>
+            <p class="section-header__overline">Latest</p>
+            <h2 class="section-header__title">Fresh off the keyboard</h2>
+            <p class="section-header__subtitle">Newest essays, tutorials and release notes.</p>
         </div>
-        <div class="about__grid reveal-stagger">
-            <div class="about__card reveal">
-                <p class="about__lede">I'm <strong>Abdul Mueed</strong>, a Full Stack Developer from Pakistan, pursuing my BBIT (Bachelor of Business and Information Technology) at Virtual University (VU). I turn ideas into functional, beautiful digital products, with a focus on cross-platform apps that feel fast on web, desktop and mobile.</p>
-                <p class="about__lede">I love open-source, minimal design and creative freedom. I created PluginStream, an Android streaming app, and I keep learning new tools, solving problems and shipping useful things.</p>
-            </div>
-            <div class="about__card reveal">
-                <ul class="about__facts">
-                    <li class="about__fact">
-                        <span class="about__fact__label">Based in</span>
-                        <span class="about__fact__value">Pakistan</span>
-                    </li>
-                    <li class="about__fact">
-                        <span class="about__fact__label">Studying</span>
-                        <span class="about__fact__value">BBIT at VU</span>
-                        <span class="about__fact__sub">Virtual University of Pakistan</span>
-                    </li>
-                    <li class="about__fact">
-                        <span class="about__fact__label">Main project</span>
-                        <span class="about__fact__value">PluginStream</span>
-                    </li>
-                    <li class="about__fact">
-                        <span class="about__fact__label">Works with</span>
-                        <span class="about__fact__value">Kotlin, JS, Next.js</span>
-                    </li>
-                    <li class="about__fact">
-                        <span class="about__fact__label">GitHub</span>
-                        <span class="about__fact__value">@am-abdulmueed</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="about__card reveal">
-                <div class="home-group">
-                    <span class="about__fact__label">My focus</span>
-                    <div class="news-list__tags">
-                        <span class="news-list__tag">Full Stack Development</span>
-                        <span class="news-list__tag">Modern Web Design</span>
-                        <span class="news-list__tag">Clean, Scalable Code</span>
-                        <span class="news-list__tag">Continuous Learning</span>
-                    </div>
-                </div>
-                <div class="home-group">
-                    <span class="about__fact__label">What I enjoy</span>
-                    <div class="news-list__tags">
-                        <span class="news-list__tag">Open source</span>
-                        <span class="news-list__tag">Minimal design</span>
-                        <span class="news-list__tag">Creative freedom</span>
-                        <span class="news-list__tag">Cross-platform apps</span>
-                        <span class="news-list__tag">Solving problems</span>
-                        <span class="news-list__tag">Shipping useful things</span>
-                        <span class="news-list__tag">Learning new tools</span>
-                    </div>
-                </div>
-                <div class="home-group">
-                    <span class="about__fact__label">Right now</span>
-                    <div class="news-list__tags">
-                        <span class="news-list__tag">Studying business and IT at VU</span>
-                        <span class="news-list__tag">Building CodeBin</span>
-                        <span class="news-list__tag">Maintaining PluginStream</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- ═══ Skills ═══ -->
-<section class="how-it-works" id="skills">
-    <div class="container">
-        <div class="section-header reveal">
-            <p class="section-header__overline">Expertise</p>
-            <h2 class="section-header__title">My tech arsenal</h2>
-        </div>
-        <div class="steps reveal-stagger" id="stepsContainer">
-            <div class="steps__line" id="stepsLine"></div>
-            <div class="step reveal">
-                <div class="step__number">01</div>
-                <h3 class="step__title">Web &amp; Frontend</h3>
-                <p class="step__desc">JavaScript · TypeScript · HTML5 · CSS3 · Next.js · Tailwind CSS</p>
-            </div>
-            <div class="step reveal">
-                <div class="step__number">02</div>
-                <h3 class="step__title">Mobile</h3>
-                <p class="step__desc">Kotlin · Android · Flutter · Responsive UI</p>
-            </div>
-            <div class="step reveal">
-                <div class="step__number">03</div>
-                <h3 class="step__title">Systems &amp; Backend</h3>
-                <p class="step__desc">Python · C++ · C# / .NET</p>
-            </div>
-            <div class="step reveal">
-                <div class="step__number">04</div>
-                <h3 class="step__title">Tools</h3>
-                <p class="step__desc">Git · GitHub · Vercel</p>
+        {% if posts.size > 0 %}
+        {% assign featured = posts | first %}
+        {% assign feat_cover = featured.image | default: "" | strip %}
+        <div class="blog-highlight reveal">
+            {% if feat_cover != "" %}
+            <a class="blog-highlight__thumb" href="{{ featured.url }}" tabindex="-1" aria-hidden="true">
+                <img src="{{ feat_cover }}" alt="{{ featured.image_alt | default: featured.title }}" loading="lazy" decoding="async">
+            </a>
+            {% endif %}
+            <div class="blog-highlight__body">
+                <p class="news-list__meta">
+                    <time datetime="{{ featured.date | date_to_xmlschema }}">{{ featured.date | date: "%B %-d, %Y" }}</time>
+                    {% for cat in featured.categories %}<a class="news-list__cat" href="/blog/?category={{ cat | slugify }}">{{ cat }}</a>{% endfor %}
+                </p>
+                <a class="blog-highlight__title" href="{{ featured.url }}">{{ featured.title }}</a>
+                {% if featured.description %}<p class="blog-highlight__excerpt">{{ featured.description }}</p>{% endif %}
+                <a class="btn btn--filled" href="{{ featured.url }}">Read post</a>
             </div>
         </div>
-    </div>
-</section>
 
-<!-- ═══ Projects ═══ -->
-<section id="projects">
-    <div class="container">
-        <div class="section-header reveal">
-            <p class="section-header__overline">Portfolio</p>
-            <h2 class="section-header__title">Featured projects</h2>
-        </div>
-        <ul class="news-list__items reveal-stagger">
+        {% assign recent = posts | slice: 1, 6 %}
+        {% if recent.size > 0 %}
+        <ul class="news-list__items news-list__items--blog blog-cards reveal-stagger">
+            {% for post in recent %}
+            {% assign thumb = post.image | default: "" | strip %}
             <li class="news-list__item reveal">
-                <h3 class="news-list__title">PluginStream</h3>
-                <p class="news-list__excerpt">An Android app that brings movies, TV series and anime into one clean interface. A plugin and extension architecture delivers ad-free streaming with no account required.</p>
-                <p class="news-list__excerpt">Plugin &amp; extension architecture · Built-in ad blocking · 360p up to 4K quality · Subtitles &amp; Chromecast</p>
-                <p class="news-list__tags">
-                    <span class="news-list__tag">Kotlin</span>
-                    <span class="news-list__tag">Android</span>
-                    <span class="news-list__tag">Open Source</span>
-                </p>
-                <div class="project-actions">
-                    <a class="btn btn--filled" href="/project/?repo=pluginstream">View details</a>
-                    <a class="news-list__rss" href="https://github.com/am-abdulmueed/pluginstream" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a class="news-list__rss" href="https://pluginstream.pages.dev/" target="_blank" rel="noopener noreferrer">Live site</a>
+                {% if thumb != "" %}
+                <a class="news-list__thumb" href="{{ post.url }}" tabindex="-1" aria-hidden="true"><img src="{{ thumb }}" alt="" loading="lazy" decoding="async"></a>
+                {% endif %}
+                <div class="news-list__main">
+                    <p class="news-list__meta">
+                        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
+                        {% for cat in post.categories %}<a class="news-list__cat" href="/blog/?category={{ cat | slugify }}">{{ cat }}</a>{% endfor %}
+                    </p>
+                    <a href="{{ post.url }}" class="news-list__title">{{ post.title }}</a>
+                    {% if post.description %}<p class="news-list__excerpt">{{ post.description }}</p>{% endif %}
                 </div>
             </li>
-            <li class="news-list__item reveal">
-                <h3 class="news-list__title">CodeBin</h3>
-                <p class="news-list__excerpt">A web app for storing and sharing code snippets, with live output, built for developers and non-developers alike. Write a snippet, see what it does, and share it with anyone through a unique link.</p>
-                <p class="news-list__excerpt">Create, edit &amp; delete snippets · Share via a unique URL · Output shown next to the code · Firebase Authentication · Firebase Realtime Database · Deployed on Vercel</p>
-                <p class="news-list__tags">
-                    <span class="news-list__tag">JavaScript</span>
-                    <span class="news-list__tag">Next.js</span>
-                    <span class="news-list__tag">Tailwind CSS</span>
-                    <span class="news-list__tag">Firebase</span>
-                    <span class="news-list__tag">In development</span>
-                </p>
-                <div class="project-actions">
-                    <a class="btn btn--filled" href="/project/?repo=codebin">View details</a>
-                    <a class="news-list__rss" href="https://github.com/am-abdulmueed/codebin" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a class="news-list__rss" href="https://am-codebin.vercel.app/" target="_blank" rel="noopener noreferrer">Live site</a>
-                </div>
-            </li>
-            <li class="news-list__item reveal">
-                <h3 class="news-list__title">AI-Base</h3>
-                <p class="news-list__excerpt">An open-source, community-driven directory to discover and learn about AI tools. Find chatbots, image generators, code generators and prompts, and compare the latest tools in one place.</p>
-                <p class="news-list__excerpt">Browse a directory of AI tools · Search for a specific tool · Descriptions, tags &amp; links for each tool · Chatbots, image &amp; code generators · Add tools with a pull request · MIT licensed</p>
-                <p class="news-list__tags">
-                    <span class="news-list__tag">JavaScript</span>
-                    <span class="news-list__tag">Open Source</span>
-                    <span class="news-list__tag">MIT License</span>
-                </p>
-                <div class="project-actions">
-                    <a class="btn btn--filled" href="/project/?repo=ai-base">View details</a>
-                    <a class="news-list__rss" href="https://github.com/am-abdulmueed/ai-base" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a class="news-list__rss" href="https://am-aibase.vercel.app/" target="_blank" rel="noopener noreferrer">Live site</a>
-                </div>
-            </li>
-            <li class="news-list__item reveal">
-                <h3 class="news-list__title">MySocials</h3>
-                <p class="news-list__excerpt">An open-source link-in-bio tool that simplifies how you manage and share your social media links. Every profile link lives in one clean page you fully control.</p>
-                <p class="news-list__excerpt">All social links in one page · Editable from a dashboard · Next.js App Router · MongoDB for storage · Shadcn UI components · Self-hostable</p>
-                <p class="news-list__tags">
-                    <span class="news-list__tag">Next.js</span>
-                    <span class="news-list__tag">MongoDB</span>
-                    <span class="news-list__tag">Shadcn UI</span>
-                    <span class="news-list__tag">Tailwind CSS</span>
-                </p>
-                <div class="project-actions">
-                    <a class="btn btn--filled" href="/project/?repo=MySocials">View details</a>
-                    <a class="news-list__rss" href="https://github.com/am-abdulmueed/MySocials" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a class="news-list__rss" href="https://msocials.vercel.app/" target="_blank" rel="noopener noreferrer">Live site</a>
-                </div>
-            </li>
-            <li class="news-list__item reveal">
-                <h3 class="news-list__title">url-sh</h3>
-                <p class="news-list__excerpt">A supercharged URL shortener built with Next.js 14 and MongoDB. Paste a long link, get a short one back, and track how it is used.</p>
-                <p class="news-list__excerpt">Shorten any URL · Custom short links · Click tracking · Fast redirects · Next.js 14 App Router · MongoDB storage</p>
-                <p class="news-list__tags">
-                    <span class="news-list__tag">Next.js 14</span>
-                    <span class="news-list__tag">MongoDB</span>
-                    <span class="news-list__tag">JavaScript</span>
-                </p>
-                <div class="project-actions">
-                    <a class="btn btn--filled" href="/project/?repo=url-sh">View details</a>
-                    <a class="news-list__rss" href="https://github.com/am-abdulmueed/url-sh" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a class="news-list__rss" href="https://url-shs.vercel.app/" target="_blank" rel="noopener noreferrer">Live site</a>
-                </div>
-            </li>
-            <li class="news-list__item reveal">
-                <h3 class="news-list__title">IDE</h3>
-                <p class="news-list__excerpt">A lightweight online HTML, CSS and JavaScript editor and compiler that runs in the browser. Write code, hit run, and see the result instantly.</p>
-                <p class="news-list__excerpt">Live HTML, CSS &amp; JS editing · Instant preview · Split code and output panes · Built with Next.js and Tailwind CSS · Shadcn UI · No install required</p>
-                <p class="news-list__tags">
-                    <span class="news-list__tag">Next.js</span>
-                    <span class="news-list__tag">Tailwind CSS</span>
-                    <span class="news-list__tag">Shadcn UI</span>
-                </p>
-                <div class="project-actions">
-                    <a class="btn btn--filled" href="/project/?repo=IDE">View details</a>
-                    <a class="news-list__rss" href="https://github.com/am-abdulmueed/IDE" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a class="news-list__rss" href="https://ide-alpha.vercel.app/" target="_blank" rel="noopener noreferrer">Live site</a>
-                </div>
-            </li>
-            <li class="news-list__item reveal">
-                <h3 class="news-list__title">Portfolio</h3>
-                <p class="news-list__excerpt">A modern, high-performance portfolio website with immersive animations and a glassmorphism interface. Visitors can switch the look to match how they like to read, and even generate a resume as a PDF.</p>
-                <p class="news-list__excerpt">Framer Motion animations · Glassmorphism UI · Dark / Light / Eye-Care themes · Real-time PDF resume generator · Built with Next.js 14 · Tailwind CSS styling</p>
-                <p class="news-list__tags">
-                    <span class="news-list__tag">Next.js 14</span>
-                    <span class="news-list__tag">Tailwind</span>
-                    <span class="news-list__tag">Framer Motion</span>
-                    <span class="news-list__tag">MIT License</span>
-                </p>
-                <div class="project-actions">
-                    <a class="btn btn--filled" href="/project/?repo=portfolio">View details</a>
-                    <a class="news-list__rss" href="https://github.com/am-abdulmueed/portfolio" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a class="news-list__rss" href="https://am-abdulmueed.vercel.app/" target="_blank" rel="noopener noreferrer">Live site</a>
-                </div>
-            </li>
-            <li class="news-list__item reveal">
-                <h3 class="news-list__title">NexGama</h3>
-                <p class="news-list__excerpt">A modern game aggregator designed with a premium Over-The-Top (OTT) streaming UI/UX. Track, discover and explore all your favourite gaming platforms, titles and updates in one seamless place.</p>
-                <p class="news-list__excerpt">OTT-style interface · All-in-one game aggregator · Detailed game insights · Real-time updates &amp; tracking · Coming soon</p>
-                <p class="news-list__tags">
-                    <span class="news-list__tag">HTML</span>
-                    <span class="news-list__tag">Cross-platform</span>
-                    <span class="news-list__tag">Coming soon</span>
-                </p>
-                <div class="project-actions">
-                    <a class="btn btn--filled" href="/project/?repo=nexgama">View details</a>
-                    <a class="news-list__rss" href="https://github.com/am-abdulmueed/nexgama" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a class="news-list__rss" href="https://nexgama.vercel.app/" target="_blank" rel="noopener noreferrer">Live site</a>
-                </div>
-            </li>
+            {% endfor %}
         </ul>
-        <div class="cta__buttons reveal">
-            <a class="btn btn--outlined" href="https://github.com/am-abdulmueed?tab=repositories" target="_blank" rel="noopener noreferrer">All repositories on GitHub</a>
+        {% endif %}
+
+        <div class="blog-more reveal">
+            <a class="btn btn--filled" href="/blog/">Browse all posts</a>
+            <a class="news-list__rss" href="/blog/feed.xml">RSS feed</a>
         </div>
+        {% else %}
+        <p class="news-list__empty">No posts yet. Add your first one from the <a href="/admin/">CMS</a>.</p>
+        {% endif %}
     </div>
 </section>
 
-<!-- ═══ Extensions ═══ -->
-<section class="get-listed" id="extensions">
+<!-- ═══ Sections ═══ -->
+{% if all_cats.size > 0 %}
+<section id="sections">
     <div class="container">
-        <div class="get-listed__card reveal-scale">
-            <div>
-                <h2 class="get-listed__title">Extensions</h2>
-                <p class="get-listed__desc">PluginStream is a client — the extensions are what turn it into a streamer. Browse the community-maintained repositories, copy a shortcode, and add a whole bundle in one tap.</p>
-                <a href="/extensions/" class="get-listed__btn">
-                    Browse extensions
-                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-                </a>
-            </div>
-            <div>
-                <ul class="checklist">
-                    <li><span class="check-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span><span>Community-maintained repositories, all in one directory</span></li>
-                    <li><span class="check-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span><span>Add a single repository or a whole bundle with a shortcode</span></li>
-                    <li><span class="check-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span><span>PluginStream only indexes them — it hosts no content itself</span></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ═══ Journey ═══ -->
-<section class="features" id="journey">
-    <div class="container">
+        {% include ad_slot.html slot="home_mid" %}
         <div class="section-header reveal">
-            <p class="section-header__overline">Journey</p>
-            <h2 class="section-header__title">Education &amp; growth</h2>
+            <p class="section-header__overline">Sections</p>
+            <h2 class="section-header__title">Browse by section</h2>
+            <p class="section-header__subtitle">Pick a topic — every post lives under one or more sections.</p>
         </div>
-        <div class="features__grid reveal-stagger">
-            <div class="feature-card reveal">
-                <span class="about__fact__label">In progress</span>
-                <h3 class="feature-card__title">Bachelor of Business &amp; Information Technology</h3>
-                <p class="feature-card__desc">Virtual University of Pakistan (BBIT). Studying business and IT while building real-world software alongside my degree.</p>
-                <div class="news-list__tags">
-                    <span class="news-list__tag">BBIT</span>
-                    <span class="news-list__tag">Virtual University</span>
-                </div>
-            </div>
-            <div class="feature-card reveal">
-                <span class="about__fact__label">Ongoing</span>
-                <h3 class="feature-card__title">Open-source developer</h3>
-                <p class="feature-card__desc">Building and maintaining projects in Kotlin and JavaScript on GitHub (@am-abdulmueed), with PluginStream as the main project.</p>
-                <div class="news-list__tags">
-                    <span class="news-list__tag">GitHub</span>
-                    <span class="news-list__tag">Kotlin</span>
-                    <span class="news-list__tag">JavaScript</span>
-                </div>
-            </div>
-            <div class="feature-card reveal">
-                <span class="about__fact__label">Project</span>
-                <h3 class="feature-card__title">Portfolio website</h3>
-                <p class="feature-card__desc">A modern, high-performance portfolio with Framer Motion animations, a glassmorphism UI, three themes (Dark, Light and Eye-Care) and a real-time PDF resume generator.</p>
-                <div class="news-list__tags">
-                    <span class="news-list__tag">Next.js 14</span>
-                    <span class="news-list__tag">Tailwind</span>
-                    <span class="news-list__tag">Framer Motion</span>
-                </div>
-            </div>
-            <div class="feature-card reveal">
-                <span class="about__fact__label">Project</span>
-                <h3 class="feature-card__title">CodeBin &amp; AI-Base</h3>
-                <p class="feature-card__desc">Two web apps live on Vercel. CodeBin stores and shares code snippets with live output, and AI-Base is an open-source directory of AI tools and prompts.</p>
-                <div class="news-list__tags">
-                    <span class="news-list__tag">Firebase</span>
-                    <span class="news-list__tag">Vercel</span>
-                    <span class="news-list__tag">Open source</span>
-                </div>
-            </div>
-            <div class="feature-card reveal">
-                <span class="about__fact__label">Project</span>
-                <h3 class="feature-card__title">PluginStream</h3>
-                <p class="feature-card__desc">An Android app that brings movies, TV series and anime into one clean interface, with a plugin and extension architecture, ad blocking, subtitles and Chromecast.</p>
-                <div class="news-list__tags">
-                    <span class="news-list__tag">Kotlin</span>
-                    <span class="news-list__tag">Android</span>
-                    <span class="news-list__tag">Open source</span>
-                </div>
-            </div>
-            <div class="feature-card reveal">
-                <span class="about__fact__label">Always</span>
-                <h3 class="feature-card__title">Learning new tools</h3>
-                <p class="feature-card__desc">Exploring more of the stack: Flutter for cross-platform apps, plus Python, C++ and C# / .NET for systems and backend work.</p>
-                <div class="news-list__tags">
-                    <span class="news-list__tag">Flutter</span>
-                    <span class="news-list__tag">Python</span>
-                    <span class="news-list__tag">C++</span>
-                    <span class="news-list__tag">C# / .NET</span>
-                </div>
-            </div>
+        <div class="cat-grid reveal-stagger">
+            {% for cat in all_cats %}
+            {% assign cat_count = 0 %}
+            {% for post in posts %}{% if post.categories contains cat %}{% assign cat_count = cat_count | plus: 1 %}{% endif %}{% endfor %}
+            <a class="cat-card reveal" href="/blog/?category={{ cat | slugify }}">
+                <span class="cat-card__name">{{ cat }}</span>
+                <span class="cat-card__count">{{ cat_count }} {% if cat_count == 1 %}post{% else %}posts{% endif %}</span>
+            </a>
+            {% endfor %}
         </div>
     </div>
 </section>
+{% endif %}
+
+<!-- ═══ Newsletter ═══ -->
+{% if site.buttondown_username and site.buttondown_username != "" %}
+<section id="newsletter">
+    <div class="container">
+        {% include ad_slot.html slot="home_bottom" %}
+        <div class="blog-newsletter reveal">
+            {% include newsletter.html id="home" title="Never miss a post" subtitle="Roughly one essay every 2 weeks. Engineering notes, tutorials and release breakdowns. No spam." %}
+        </div>
+    </div>
+</section>
+{% endif %}
 
 <!-- ═══ Contact ═══ -->
 <section class="cta" id="contact">
     <div class="container">
         <div class="cta__inner reveal">
             <h2 class="cta__title">Let's build something great.</h2>
-            <p class="cta__desc">Have an idea or a project in mind? My inbox and DMs are open — or use the <a href="/contact/">contact form</a> and it lands straight in my inbox.</p>
+            <p class="cta__desc">Have an idea, a project, or feedback on a post? My inbox is open — use the <a href="/contact/">contact form</a> and it lands straight in my inbox.</p>
             <div class="cta__buttons">
                 <a href="/contact/" class="btn btn--filled">Contact me</a>
                 <a href="mailto:hello@am-abdulmueed.me" class="btn btn--outlined">Send me an email</a>
-                <a href="https://github.com/am-abdulmueed" class="btn btn--outlined" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="https://instagram.com/am-abdulmueed" class="btn btn--outlined" target="_blank" rel="noopener noreferrer">Instagram</a>
-                <a href="https://am-abdulmueed.vercel.app" class="btn btn--outlined" target="_blank" rel="noopener noreferrer">Website</a>
             </div>
         </div>
     </div>
 </section>
-
-<script>
-(() => {
-    /* ─── Steps Timeline ─── */
-    const stepsC = document.getElementById('stepsContainer');
-    const stepsLine = document.getElementById('stepsLine');
-    if (stepsC && stepsLine) {
-        const steps = stepsC.querySelectorAll('.step');
-        const stepsObs = new IntersectionObserver(entries => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    stepsLine.classList.add('animate');
-                    steps.forEach((s, i) => setTimeout(() => s.classList.add('active'), 200 + i * 220));
-                    stepsObs.unobserve(e.target);
-                }
-            });
-        }, { threshold: 0.3 });
-        stepsObs.observe(stepsC);
-    }
-})();
-</script>

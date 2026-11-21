@@ -21,7 +21,7 @@ jobs:
         id: sitemap
         run: |
           set -euo pipefail
-          curl -sSL --fail https://am-abdulmueed.github.io/sitemap.xml -o /tmp/sitemap.xml
+          curl -sSL --fail https://bloxioe.github.io/sitemap.xml -o /tmp/sitemap.xml
           # Extract <loc> values, drop XML tags, dedupe
           grep -oE '<loc>[^<]+' /tmp/sitemap.xml | sed 's|<loc>||' | sort -u > /tmp/urls.txt
           echo "url_count=$(wc -l < /tmp/urls.txt)" >> "$GITHUB_OUTPUT"
@@ -41,7 +41,7 @@ jobs:
           payload = {
               "host": "am-abdulmueed.github.io",
               "key": "1789c2770b754474b4a41db7655f202e",
-              "keyLocation": "https://am-abdulmueed.github.io/1789c2770b754474b4a41db7655f202e.txt",
+              "keyLocation": "https://bloxioe.github.io/1789c2770b754474b4a41db7655f202e.txt",
               "urlList": urls,
           }
           with open('/tmp/payload.json', 'w') as f:

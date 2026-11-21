@@ -1,5 +1,7 @@
 ---
 title: Why Local-First Apps Are the Future of Personal Productivity
+image: /assets/images/blog/local-first.jpg
+image_alt: Editorial illustration of a device keeping files locally while syncing a separate copy.
 description: Exploring how local-first software gives users back data ownership,
   instant speed, and offline reliability without sacrificing modern sync
   features.
@@ -56,3 +58,5 @@ In the past, local storage meant losing multi-device sync. Today, technologies l
 Whether you are building a markdown editor, a budget tracker, or a developer utility, putting the user's device first leads to faster, more resilient software. People notice when an app respects their time and works reliably everywhere.
 
 If you want to discuss local-first architecture or share tools built with this approach, reach out anytime or check out my latest experiments on GitHub.
+
+\- Bloxioe

@@ -6,14 +6,14 @@ language: en
 
 author:
   name: Bloxioe
-  url: https://github.com/am-abdulmueed
-  twitter: am-abdulmueed
+  url: https://github.com/bloxioe
+  twitter: bloxioe
 
 social:
-  twitter: am-abdulmueed
+  twitter: bloxioe
 
 
-buttondown_username: "am-abdulmueed"
+buttondown_username: "bloxioe"
 
 # Search Console verification (paste the content from the meta tag Google/Bing give you).
 # Leave empty to disable verification meta tags.

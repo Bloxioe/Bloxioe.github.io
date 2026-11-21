@@ -9,9 +9,9 @@ The personal technology blog of **Bloxioe**, with articles on software, current 
 
 This repository is a **static Jekyll site**. Jekyll builds the pages and blog posts into HTML; small amounts of browser-side JavaScript power interactive features. The site has no visitor accounts or first-party database. Contact, newsletter, and advertising features use third-party providers.
 
-- **Live site:** [am-abdulmueed.github.io](https://bloxioe.github.io)
-- **Repository:** [am-abdulmueed/am-abdulmueed.github.io](https://github.com/am-abdulmueed/am-abdulmueed.github.io)
-- **App source:** [am-abdulmueed/pluginstream](https://github.com/am-abdulmueed/pluginstream)
+- **Live site:** [bloxioe.github.io](https://bloxioe.github.io)
+- **Repository:** [bloxioe/bloxioe.github.io](https://github.com/bloxioe/bloxioe.github.io)
+- **App source:** [bloxioe/pluginstream](https://github.com/bloxioe/pluginstream)
 - **App docs:** [pluginstream.pages.dev](https://pluginstream.pages.dev)
 
 ---
@@ -135,8 +135,8 @@ The Gemfile targets **Jekyll 4.3+** (locked at 4.4.1). GitHub Pages performs its
 ### 1. Clone
 
 ```bash
-git clone https://github.com/am-abdulmueed/am-abdulmueed.github.io.git
-cd am-abdulmueed.github.io
+git clone https://github.com/bloxioe/bloxioe.github.io.git
+cd bloxioe.github.io
 ```
 
 ### 2. Install dependencies
@@ -289,7 +289,7 @@ Everything is client-side and key-free apart from two intentionally public keys.
 | Integration | Used on | Endpoint | Key |
 | --- | --- | --- | --- |
 | GitHub REST API — repo metadata | ex-`/project/` | `GET api.github.com/repos/:owner/:repo` | none |
-| GitHub REST API — releases | ex-`/download/` | `GET api.github.com/repos/am-abdulmueed/pluginstream/releases?per_page=100` | none |
+| GitHub REST API — releases | ex-`/download/` | `GET api.github.com/repos/bloxioe/pluginstream/releases?per_page=100` | none |
 | Contact form | `/contact/` | `POST api.web3forms.com/submit` | public Web3Forms access key |
 | Newsletter | `/blog/` | `POST buttondown.com/api/emails/embed-subscribe/githubstore` | none (public username) |
 | Social card images for posts | All blog posts | `github-store-cms-oauth.rainxchzed.workers.dev/og?title=…&description=…` | none |
@@ -362,9 +362,9 @@ Both are intentionally dependency-free: `curl`, `python3` and shell only. `refre
 
 ## Hosting and deployment
 
-The site is hosted on **GitHub Pages** as a user site, served at [am-abdulmueed.github.io](https://bloxioe.github.io):
+The site is hosted on **GitHub Pages** as a user site, served at [bloxioe.github.io](https://bloxioe.github.io):
 
-1. Content is pushed to the `main` branch of `am-abdulmueed/am-abdulmueed.github.io`.
+1. Content is pushed to the `main` branch of `bloxioe/bloxioe.github.io`.
 2. GitHub builds the site with Jekyll and publishes it automatically — no `gh-pages` branch, no committed build output.
 3. Because the repository is named `<user>.github.io`, the site is published at the `https://bloxioe.github.io` root with HTTPS enabled by default.
 4. Because Pages performs the build itself, `Gemfile`/`Gemfile.lock` are ignored in production; keep plugins limited to what Pages supports (currently `jekyll-sitemap` and `jekyll-redirect-from`).
@@ -466,7 +466,7 @@ Contributions to copy, accessibility, performance and documentation are welcome.
 4. Keep JavaScript progressive — the page must remain usable with JS disabled.
 5. Open a pull request describing **what changed and why**, with before/after screenshots for visual changes.
 
-For app bugs rather than website issues, open an issue on [am-abdulmueed/pluginstream](https://github.com/am-abdulmueed/pluginstream/issues) instead.
+For app bugs rather than website issues, open an issue on [bloxioe/pluginstream](https://github.com/bloxioe/pluginstream/issues) instead.
 
 ---
 

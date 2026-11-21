@@ -39,7 +39,7 @@ jobs:
           import json
           urls = [line.strip() for line in open('/tmp/capped.txt') if line.strip()]
           payload = {
-              "host": "am-abdulmueed.github.io",
+              "host": "bloxioe.github.io",
               "key": "1789c2770b754474b4a41db7655f202e",
               "keyLocation": "https://bloxioe.github.io/1789c2770b754474b4a41db7655f202e.txt",
               "urlList": urls,

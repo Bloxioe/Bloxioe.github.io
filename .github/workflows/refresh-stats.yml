@@ -75,8 +75,8 @@ jobs:
       - name: Commit if changed
         run: |
           set -euo pipefail
-          git config user.name "am-abdulmueed"
-          git config user.email "am-abdulmueed5@gmail.com"
+          git config user.name "bloxioe"
+          git config user.email "bloxioe5@gmail.com"
           if git diff --quiet _data/stats.yml; then
             echo "No changes — nothing to commit."
             exit 0

@@ -25,7 +25,11 @@ Front-matter knobs per page:
 
 {%- assign page_cover = page.image | default: "" | strip -%}
 {%- if page_cover != "" -%}
-  {%- assign og_image = page_cover -%}
+  {%- if page_cover contains "://" -%}
+    {%- assign og_image = page_cover -%}
+  {%- else -%}
+    {%- assign og_image = page_cover | prepend: site.url -%}
+  {%- endif -%}
   {%- assign og_image_w = 1200 -%}
   {%- assign og_image_h = 630 -%}
 {%- elsif page.layout == 'news_post' -%}
@@ -189,7 +193,7 @@ Front-matter knobs per page:
   "@type": "WebSite",
   "@id": {{ site.url | append: "/#website" | jsonify }},
   "name": "Bloxioe",
-  "alternateName": "am-abdulmueed.github.io",
+  "alternateName": "bloxioe.github.io",
   "url": {{ site.url | jsonify }},
   "description": {{ page_description | jsonify }},
   "inLanguage": {{ site.language | default: "en" | jsonify }},

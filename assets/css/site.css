@@ -2311,11 +2311,22 @@ body.has-announce {
 .news-article__newsletter { margin: 40px 0 32px; }
 
 @media (max-width: 640px) {
-    .newsletter { padding: 26px 20px; }
+    .newsletter:not(.newsletter--compact) { padding: 18px 14px; }
+    .newsletter--compact { padding: 16px 0; }
     .newsletter-section { padding: 48px 16px; }
-    .newsletter__field { flex-direction: column; gap: 12px; }
-    .newsletter__field input[type="email"],
-    .newsletter__field button { width: 100%; }
+    .newsletter__head { margin-bottom: 12px; }
+    .newsletter__field { flex-wrap: nowrap; gap: 8px; }
+    .newsletter__field input[type="email"] {
+        flex: 1 1 0;
+        height: 44px;
+        padding: 0 10px;
+    }
+    .newsletter__field button {
+        flex: 0 0 auto;
+        height: 44px;
+        padding: 0 14px;
+        font-size: 0.9375rem;
+    }
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -2593,6 +2604,8 @@ textarea, select { font-size: 16px; }
 .news-list__item[hidden] { display: none; }
 .news-list__thumb {
     flex: 0 0 200px;
+    aspect-ratio: 1200 / 630;
+    align-self: flex-start;
     display: block;
     border: var(--bw-chip) solid var(--ink);
     box-shadow: var(--sh-sub);
@@ -2600,11 +2613,10 @@ textarea, select { font-size: 16px; }
     overflow: hidden;
 }
 .news-list__thumb img {
+    display: block;
     width: 100%;
     height: 100%;
-    min-height: 120px;
-    object-fit: cover;
-    aspect-ratio: 16 / 10;
+    object-fit: contain;
 }
 .news-list__main { flex: 1; min-width: 0; }
 .news-list__empty { margin-top: 1rem; color: var(--ink-soft); }
@@ -2652,12 +2664,14 @@ textarea, select { font-size: 16px; }
 }
 .blog-highlight__thumb {
     flex: 1 1 340px;
+    aspect-ratio: 1200 / 630;
+    align-self: flex-start;
     display: block;
     border-right: var(--bw-panel) solid var(--ink);
     background: var(--surface-variant);
     overflow: hidden;
 }
-.blog-highlight__thumb img { width: 100%; height: 100%; min-height: 240px; object-fit: cover; }
+.blog-highlight__thumb img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .blog-highlight__body {
     flex: 1 1 360px;
     padding: 2rem;
@@ -2681,7 +2695,6 @@ textarea, select { font-size: 16px; }
 .blog-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .blog-cards .news-list__item { flex-direction: column; gap: 1rem; }
 .blog-cards .news-list__thumb { flex-basis: auto; width: 100%; }
-.blog-cards .news-list__thumb img { min-height: 150px; }
 
 /* Home page — "all posts" row */
 .blog-more {

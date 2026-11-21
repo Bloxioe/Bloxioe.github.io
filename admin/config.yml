@@ -9,25 +9,20 @@
 #   2) bundle exec jekyll serve    → http://localhost:4000
 #   Phir browser mein kholo        → http://localhost:4000/admin/
 #
-# Live (GitHub OAuth) par publish karna ho to:
-#   - neeche `local_backend` ko false karo
-#   - `base_url` line ko uncomment karo
-#   - `display_url` ko live URL par set karo
+# Live (GitHub OAuth): keep `local_backend` disabled, set the proxy URL and
+# point `display_url` at the deployed site.
 # ─────────────────────────────────────────────────────────────
-local_backend: true
+# local_backend: true
 
 backend:
   name: github
-  repo: am-abdulmueed/am-abdulmueed.github.io
+  repo: bloxioe/bloxioe.github.io
   branch: main
-  # Sirf live admin ke liye zaroori (GitHub OAuth proxy). Local par iski zarurat nahi:
-  # base_url: https://bloxioe-decap-proxy.bloxioe.workers.dev
+  # GitHub OAuth proxy; callback URL on the OAuth app must end in /callback.
+  base_url: https://bloxioe-decap-proxy.bloxioe.workers.dev
 
 site_url: https://bloxioe.github.io
-# CMS ke "View Live" button ka target — local par localhost khulta hai:
-display_url: http://localhost:4000/
-# Live par neeche wali line use karo:
-# display_url: https://bloxioe.github.io
+display_url: https://bloxioe.github.io
 
 media_folder: assets/uploads
 public_folder: /assets/uploads

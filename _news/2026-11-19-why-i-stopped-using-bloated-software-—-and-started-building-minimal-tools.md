@@ -1,5 +1,7 @@
 ---
 title: Why I Stopped Using bloated Software — and Started Building Minimal Tools
+image: /assets/images/blog/minimal-software.jpg
+image_alt: Editorial illustration of a focused, lightweight software tool.
 description: Thoughts on software bloat, why small single-purpose tools win, and
   the lessons I've learned shipping open-source projects from scratch.
 date: 2026-11-20
@@ -180,3 +182,5 @@ If you're learning to code, the best advice I can give is to ship small things p
 Put the code online, share the link, and fix things as real people use them.
 
 If you want to check out the code behind any of my projects or collaborate on something minimal, find me on  or drop a message at [hello@am-abdulmueed.me](mailto:hello@am-abdulmueed.me).
+
+\- Bloxioe

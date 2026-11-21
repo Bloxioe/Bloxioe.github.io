@@ -1,8 +1,8 @@
 ---
 title: "AI Agents in 2026: How They Work, Where They Help, and What to Watch Out For"
-image: https://example.com/images/ai-agents-workflow-2026.jpg
-image_alt: Minimalist diagram showing an AI agent coordinating calendar tasks,
-  code tools, and research notes.
+image: https://static.vecteezy.com/system/resources/previews/087/779/788/non_2x/artificial-intelligence-integration-concept-ai-sphere-connecting-digital-systems-and-applications-futuristic-technology-interface-for-ai-platforms-and-business-automation-illustration-vector.jpg
+image_alt: Illustration of an AI system connecting digital tools, workflows, and
+  business automation platforms.
 description: "A practical guide to AI agents: how they differ from standard
   chatbots, where they save time, and the risks to manage before delegating
   work."

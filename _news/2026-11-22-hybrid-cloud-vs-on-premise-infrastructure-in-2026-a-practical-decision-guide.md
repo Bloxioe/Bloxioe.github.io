@@ -1,6 +1,7 @@
 ---
 title: "Hybrid Cloud vs. On-Premise Infrastructure in 2026: A Practical Decision
   Guide"
+image: /assets/uploads/gemini_generated_image_c6dnivc6dnivc6dn.jpg
 image_alt: Illustration of cloud servers, local data infrastructure, and
   enterprise network integration.
 description: "A practical guide to modern cloud architecture: how hybrid setups

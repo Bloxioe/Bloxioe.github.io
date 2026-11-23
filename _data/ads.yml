@@ -41,7 +41,7 @@ units:
     format: smartlink
     code: ""
     url: https://araplhn.org/4/f519c85fcec02806da8619567ecd9785
-    label_text: Sponsored link
+    label_text: Click Here
 placements:
   - slot: site_wide
     units:

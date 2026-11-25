@@ -1,6 +1,6 @@
 ---
 title: GTA 6 Hacker Gets Seven Years in Prison, Walks Out the Same Day
-image: https://images.unsplash.com/photo-1550751827-4bd374c3f58b
+image: /assets/uploads/gta-6-hacker-sentenced-seven-years.png
 image_alt: Digital security concept showing code on a dark screen, representing
   the GTA 6 hacking case and cybercrime sentencing.
 description: The Lapsus$ member behind the GTA 6 leak has been sentenced to

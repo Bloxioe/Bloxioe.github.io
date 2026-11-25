@@ -1,7 +1,7 @@
 ---
 title: "Shenzhou-24 Launched: Pakistan's First Astronaut Heads to China's
   Tiangong Space Station"
-image: https://images.unsplash.com/photo-REPLACE-WITH-YOUR-ROCKET-IMAGE
+image: /assets/uploads/china-launches-shenzhou-24-mission.png
 image_alt: A rocket lifting off into the sky during a crewed space mission launch.
 description: China has launched Shenzhou-24 with Pakistani astronaut Muhammad
   Zeeshan Ali on board. Here is what happened, who is on the crew, and why this
